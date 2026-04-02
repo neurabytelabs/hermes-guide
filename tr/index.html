@@ -914,10 +914,10 @@
       </div>
       <div class="topbar__actions">
         <a class="pill" href="#mindset">Zihniyet değişimi</a>
-        <a class="pill" href="#ascii-cinema">ASCII Sinema</a>
+        <a class="pill" href="#ascii-cinema">ASCII sinema</a>
         <a class="pill" href="#workflow">İş akışı</a>
         <a class="pill" href="#progression">İlerleme</a>
-        <button class="theme-toggle" onclick="toggleTheme()">Tema değiştir</button>
+        <button class="theme-toggle" onclick="toggleTheme()">Temayı değiştir</button>
       </div>
     </div>
 
@@ -925,7 +925,7 @@
       <div class="hero-card">
         <div class="subtitle">Hermes Zero-to-Hero</div>
         <h1>Don’t just prompt better.<br>Operate better.</h1>
-        <div class="lede"><strong>Gerçek yükseliş daha iyi promptlar değil.</strong> Agent operatörü olmaktır.</div>
+        <div class="lede"><strong>Gerçek yükseliş daha iyi promptlar değil.</strong> Ajan operatörü olmaktır.</div>
         <div class="micro">Hermes ile kişisel bir operasyon sistemi kur: kalıcı bağlam, eylemden önce inceleme, değişiklikten önce planlama ve her seferinde sıfırdan başlamak yerine birikerek güçlenen iş akışları.</div>
       </div>
       <div class="signal-stack">
@@ -936,7 +936,7 @@
         </div>
         <div class="signal">
           <div class="label">Ana çengel</div>
-          <div class="value">İncele → Planla → Uygula</div>
+          <div class="value">Inspect → Plan → Act</div>
           <div class="note">Hatırlaması kolay. Sonuçları değiştirecek kadar güçlü.</div>
         </div>
         <div class="signal">
@@ -976,11 +976,11 @@
               <ul class="node-list">
                 <li>Kalıcı bağlam ver</li>
                 <li>Önce mevcut durumu incele</li>
-                <li>Değiştirmeden önce planla</li>
+                <li>Bir şeyi değiştirmeden önce planla</li>
                 <li>Gerçekliği doğrulamak için araçları kullan</li>
                 <li>İşe yarayanı yakala ve tekrarı otomatikleştir</li>
               </ul>
-              <div class="callout callout--sage">Bu Hermes'i akıllı bir yanıtlayıcıdan operasyon sisteminin parçasına dönüştürür.</div>
+              <div class="callout callout--sage">Bu Hermes’i akıllı bir yanıtlayıcıdan operasyon sisteminin parçasına dönüştürür.</div>
             </div>
           </div>
         </div>
@@ -992,13 +992,13 @@
         <div class="section-head section-head--cinema">
           <div class="section-head__main">
             <div class="eyebrow">Bölüm 2</div>
-            <h2>ASCII Sinema — yaşayan bir Hermes ajanı</h2>
-            <p>Bu gömülü ASCII video tüm süreci anlatır: kaotik sohbet kullanımından kalıcı bağlama, inceleme, planlama, uygulama, sistem yakalama ve otomasyona.</p>
+            <h2>ASCII sinema — yaşayan bir Hermes ajanı</h2>
+            <p>Bu gömülü ASCII video tüm süreci anlatır: kaotik sohbet kullanımından kalıcı bağlama, inceleme, planlama, uygulama, sistem yakalama ve otomasyona. Arka plan her sahnede değişir, böylece görsel alan her zaman anlama eşlik eder.</p>
           </div>
           <div class="section-head__aside">
             <div class="eyebrow">Oynatma</div>
             <div class="cinema-controls cinema-controls--header">
-              <button class="cinema-btn cinema-btn--accent" id="playDuraklatBtn" type="button">Duraklat</button>
+              <button class="cinema-btn cinema-btn--accent" id="playPauseBtn" type="button">Duraklat</button>
               <button class="cinema-btn" id="restartBtn" type="button">Baştan</button>
               <button class="cinema-btn" id="speakBtn" type="button">Seslendir</button>
             </div>
@@ -1009,7 +1009,7 @@
           <div class="cinema-terminal">
             <div class="terminal-bar">
               <div class="terminal-dots"><span></span><span></span><span></span></div>
-              <div class="terminal-title">Hermes ASCII Sinema / yaşayan ajan yürüyüşü</div>
+              <div class="terminal-title">Hermes ASCII sinema / yaşayan ajan anlatımı</div>
               <div class="terminal-counter" id="sceneCounter">Sahne 1 / 7</div>
             </div>
             <div class="ascii-stage">
@@ -1020,10 +1020,10 @@
                   <div id="captionTheme">Tema: sohbet kaosu</div>
                 </div>
                 <div class="caption-title" id="captionTitle">Çoğu insan sohbet kaosunda başlar.</div>
-                <div class="caption-copy" id="captionCopy">Hermes bir sohbet botu gibi kullanılıyor, bu yüzden bağlam sürekli sıfırlanıyor ve sistem hiç birikmiyor. Ajan canlı ama sığ isteklere sıkışmış durumda.</div>
+                <div class="caption-copy" id="captionCopy">Hermes is being used like a chatbot, so context keeps resetting and the system never compounds. The agent is alive, but it is trapped in shallow requests.</div>
                 <div class="caption-meta">
-                  <div class="caption-tag"><strong id="captionUygulaion">Uygulaion</strong> <span id="captionUygulaionValue">Yanlış modeli fark et</span></div>
-                  <div class="caption-tag"><strong id="captionBackground">Background</strong> <span id="captionBackgroundValue">mesaj fırtınaları ve kopuk akışlar</span></div>
+                  <div class="caption-tag"><strong id="captionAction">Eylem</strong> <span id="captionActionValue">Yanlış modeli fark et</span></div>
+                  <div class="caption-tag"><strong id="captionBackground">Arka plan</strong> <span id="captionBackgroundValue">mesaj fırtınaları ve kopuk akışlar</span></div>
                 </div>
                 <div class="cinema-progress" aria-hidden="true"><div class="cinema-progress__bar" id="sceneProgress"></div></div>
                 <div class="cinema-status">
@@ -1051,44 +1051,44 @@
             <div class="eyebrow">Bölüm 3</div>
             <h2>Operasyon modeli</h2>
           </div>
-          <p>Bunlar Hermes'i gerçek işte yararlı kılan davranışlardır.</p>
+          <p>Bunlar Hermes’i gerçek işte yararlı kılan davranışlardır, sadece sohbet penceresinde ilginç değil.</p>
         </div>
         <div class="mini-grid">
           <article class="ve-card">
             <div class="ve-card__label">01 / Yeniden çerçevele</div>
             <h3 class="ve-card__title">Hermes sadece bir sohbet botu değil.</h3>
-            <p class="ve-card__copy">Bağlam taşıyabildiğinde, gerçekliği inceleyebildiğinde ve araçları kullanabildiğinde güçlü olur.</p>
+            <p class="ve-card__copy">Bağlam taşıyabildiğinde, gerçekliği inceleyebildiğinde, araçları kullanabildiğinde ve işi yürütmeye yardımcı olduğunda güçlü olur.</p>
             <div class="callout">Cevaplar zemin. Uygulama asıl mesele.</div>
           </article>
           <article class="ve-card">
             <div class="ve-card__label">02 / Kimlik değişimi</div>
-            <h3 class="ve-card__title">Operatör gibi düşün, prompt yazıcı gibi değil.</h3>
+            <h3 class="ve-card__title">Prompt yazıcı gibi değil, operatör gibi düşün.</h3>
             <p class="ve-card__copy">Amaç daha iyi ifade değil. Amaç daha iyi uygulama.</p>
             <div class="callout callout--gold">Sihirli promptların peşinden koşmayı bırak. Güvenilir iş akışları tasarla.</div>
           </article>
           <article class="ve-card">
             <div class="ve-card__label">03 / Bağlam</div>
             <h3 class="ve-card__title">Kalıcı bağlamla başla.</h3>
-            <p class="ve-card__copy">Hermes'e kim olduğunu, projenin ne olduğunu, neyin önemli olduğunu ve neye dokunulmaması gerektiğini söyle.</p>
+            <p class="ve-card__copy">Hermes’e kim olduğunu, projenin ne olduğunu, şu an neyin önemli olduğunu, başarının neye benzediğini ve neye dokunulmaması gerektiğini söyle.</p>
             <div class="callout">Bağlam yok = sığ uygulama.</div>
           </article>
           <article class="ve-card">
             <div class="ve-card__label">04 / İnceleme</div>
             <h3 class="ve-card__title">Eylemden önce incele.</h3>
-            <p class="ve-card__copy">Dosyaları değiştirmeden önce Hermes'ten mevcut durumu incelemesini iste.</p>
+            <p class="ve-card__copy">Dosyaları değiştirmeden, komut çalıştırmadan veya karar vermeden önce Hermes’ten mevcut durumu incelemesini iste.</p>
             <div class="callout callout--sage">Önce oku. Sonra değiştir.</div>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">05 / Planlalama</div>
+            <div class="ve-card__label">05 / Planlama</div>
             <h3 class="ve-card__title">Değişiklikten önce planla.</h3>
-            <p class="ve-card__copy">Kısa bir plan kaosu azaltır ve etki alanını daraltır. Dev bir şartnameye değil, net bir yola ihtiyacın var.</p>
+            <p class="ve-card__copy">Kısa bir plan kaosu azaltır, varsayımları ortaya çıkarır ve etki alanını daraltır. Dev bir şartnameye değil, net bir yola ihtiyacın var.</p>
             <div class="callout callout--gold">Daha az doğaçlama. Daha fazla kontrol.</div>
           </article>
           <article class="ve-card">
             <div class="ve-card__label">06 / Araç kullanımı</div>
             <h3 class="ve-card__title">İşi somutlaştırmak için araçları kullan.</h3>
             <p class="ve-card__copy">Terminal. Dosyalar. Web. Tarayıcı. Görev takibi. Delegasyon. Somut uygulama her zaman makul metni yener.</p>
-            <div class="callout callout--danger">If reality can be checked, don’t settle for guessing.</div>
+            <div class="callout callout--danger">Gerçeklik kontrol edilebiliyorsa tahminle yetinme.</div>
           </article>
         </div>
       </div>
@@ -1112,22 +1112,22 @@
           <div class="pipeline__step">
             <div class="pipeline__num">2</div>
             <div class="pipeline__title">İncele</div>
-            <p>Dokunmadan önce dokümanları oku, dosyaları ara, varsayımları doğrula ve durumu haritala.</p>
+            <p>Dokunmadan önce dokümanları oku, dosyaları ara, varsayımları doğrula ve mevcut durumu haritala.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">3</div>
-            <div class="pipeline__title">Planlala</div>
-            <p>İşi kontrollü adımlara böl, riskleri ortaya çıkar ve sırayı gözden geçirilebilir yap.</p>
+            <div class="pipeline__title">Planla</div>
+            <p>İşi kontrollü adımlara böl, riskleri ortaya çıkar ve sırayı gözden geçirilebilir hale getir.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">4</div>
             <div class="pipeline__title">Uygula</div>
-            <p>Kasıtlı olarak uygula, değişiklikleri net raporla ve riskli durumda dur.</p>
+            <p>Kasıtlı olarak uygula, değişiklikleri net raporla ve riskli bir durum ortaya çıktığında dur.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">5</div>
             <div class="pipeline__title">Biriktir</div>
-            <p>İyi sonuçları yeniden kullanılabilir beceriler, şablonlar ve otomasyonlara dönüştür.</p>
+            <p>İyi sonuçları yeniden kullanılabilir becerilere, şablonlara, kontrol listelerine ve tekrarlayan otomasyonlara dönüştür.</p>
           </div>
         </div>
       </div>
@@ -1138,7 +1138,7 @@
         <div class="big-quote">
           <div class="eyebrow">Bölüm 5</div>
           <blockquote>Kişisel operasyon sistemini kur.</blockquote>
-          <p>Hermes sohbet botu olmayı bırakıp senin uygulama şeklinin parçası olduğunda güçlü olur. Gerçek kazanım daha iyi bir cevap değil, işi daha sakin, daha hızlı, daha tekrarlanabilir şekilde ilerletmektir.</p>
+          <p>Hermes sohbet botu olmayı bırakıp senin uygulama şeklinin parçası olduğunda güçlü olur. Gerçek kazanım daha iyi bir cevap değil; işi daha sakin, daha hızlı ve daha tekrarlanabilir şekilde ilerletmektir.</p>
         </div>
         <div class="kpi-stack">
           <div class="kpi">
@@ -1146,20 +1146,20 @@
             <div class="kpi-value">Sohbet kullanıcısı</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Then</div>
+            <div class="kpi-label">Sonra</div>
             <div class="kpi-value">Yapılandırılmış kullanıcı</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Then</div>
+            <div class="kpi-label">Sonra</div>
             <div class="kpi-value">Bağlam-bilinçli operatör</div>
           </div>
           <div class="kpi">
-            <div class="kpi-label">Then</div>
+            <div class="kpi-label">Sonra</div>
             <div class="kpi-value">Sistem kurucu</div>
           </div>
         </div>
       </div>
-      <div class="footer-note"><strong>Final line:</strong> Gerçek yükseliş daha iyi promptlar değil. Ajan operatörü olmaktır. Hermes'i önce incelemek, net planlamak, kasıtlı uygulamak ve işe yarayanı kalıcı sistemlere dönüştürmek için kullan.</div>
+      <div class="footer-note"><strong>Son söz:</strong> Gerçek yükseliş daha iyi promptlar değil. Ajan operatörü olmaktır. Hermes’i önce incelemek, net planlamak, kasıtlı uygulamak ve işe yarayanı kalıcı sistemlere dönüştürmek için kullan.</div>
     </section>
   </div>
 
@@ -1174,11 +1174,11 @@
     const captionTitle = document.getElementById('captionTitle');
     const captionCopy = document.getElementById('captionCopy');
     const captionTheme = document.getElementById('captionTheme');
-    const captionUygulaionValue = document.getElementById('captionUygulaionValue');
+    const captionActionValue = document.getElementById('captionActionValue');
     const captionBackgroundValue = document.getElementById('captionBackgroundValue');
     const sceneCounter = document.getElementById('sceneCounter');
     const sceneList = document.getElementById('sceneList');
-    const playDuraklatBtn = document.getElementById('playDuraklatBtn');
+    const playPauseBtn = document.getElementById('playPauseBtn');
     const restartBtn = document.getElementById('restartBtn');
     const speakBtn = document.getElementById('speakBtn');
     const sceneProgress = document.getElementById('sceneProgress');
@@ -1195,104 +1195,104 @@
         id: 'chat-chaos',
         short: 'Yanlış model',
         title: 'Çoğu insan sohbet kaosunda başlar.',
-        note: 'Hermes is alive, but trapped in shallow prompts.',
-        themeLabel: 'chat chaos',
+        note: 'Hermes canlı ama sığ promptlara sıkışmış durumda.',
+        themeLabel: 'sohbet kaosu',
         action: 'Yanlış modeli fark et',
         background: 'mesaj fırtınaları ve kopuk akışlar',
         narration: 'Hermes bir sohbet botu gibi kullanılıyor, bu yüzden bağlam sürekli sıfırlanıyor ve sistem hiç birikmiyor. Ajan canlı ama sığ isteklere sıkışmış durumda.',
         duration: 7000,
         mode: 'chaos',
-        pulse: 'unstable',
-        mood: 'fractured'
+        pulse: 'düzensiz',
+        mood: 'parçalı'
       },
       {
         id: 'durable-context',
         short: 'Bağlam',
-        title: 'Then the operator loads durable context.',
-        note: 'Identity, repo, goals, constraints, and do-not-touch zones come into frame.',
-        themeLabel: 'memory vault',
-        action: 'Give stable context',
-        background: 'memory blocks, source-of-truth rails, warm signal nodes',
-        narration: 'Now the workflow changes. Hermes receives stable information about the user, the project, constraints, preferences, and safe boundaries. The environment stops being generic.',
+        title: 'Sonra operatör kalıcı bağlamı yükler.',
+        note: 'Kimlik, repo, hedefler, kısıtlar ve dokunulmayacak alanlar görünür hale gelir.',
+        themeLabel: 'hafıza kasası',
+        action: 'Kalıcı bağlam ver',
+        background: 'hafıza blokları, doğruluk rayları, sıcak sinyal düğümleri',
+        narration: 'Şimdi iş akışı değişiyor. Hermes kullanıcı, proje, kısıtlar, tercihler ve güvenli sınırlar hakkında kalıcı bilgi alıyor. Ortam artık jenerik olmaktan çıkıyor.',
         duration: 7000,
         mode: 'memory',
-        pulse: 'steady',
-        mood: 'grounded'
+        pulse: 'kararlı',
+        mood: 'oturmuş'
       },
 
       {
         id: 'inspect-state',
         short: 'İncele',
-        title: 'A good agent inspects before acting.',
-        note: 'The living agent scans folders, docs, and structure before touching anything.',
-        themeLabel: 'repo map',
-        action: 'İncele current reality',
-        background: 'directory trees, document rails, scan lines and map grids',
-        narration: 'Instead of guessing, Hermes reads the repository, searches relevant files, and maps the current state. İnceleion lowers risk before any change begins.',
+        title: 'İyi bir ajan harekete geçmeden önce inceler.',
+        note: 'Yaşayan ajan, herhangi bir şeye dokunmadan önce klasörleri, dokümanları ve yapıyı tarar.',
+        themeLabel: 'repo haritası',
+        action: 'Mevcut durumu incele',
+        background: 'dizin ağaçları, doküman rayları, tarama çizgileri ve harita ızgaraları',
+        narration: 'Tahmin etmek yerine Hermes repoyu okur, ilgili dosyaları arar ve mevcut durumu haritalar. İnceleme, değişiklik başlamadan önce riski düşürür.',
         duration: 7000,
         mode: 'inspect',
-        pulse: 'scanning',
-        mood: 'analytic'
+        pulse: 'tarıyor',
+        mood: 'analitik'
       },
 
       {
         id: 'plan-room',
         short: 'Planla',
-        title: 'Planlaning turns motion into controlled execution.',
-        note: 'The background becomes a structured planning room: boxes, arrows, dependencies, and bounded next steps.',
-        themeLabel: 'planning room',
-        action: 'Create the path before change',
-        background: 'linked plan boxes, directional arrows, bounded steps',
-        narration: 'A short explicit plan exposes assumptions, sequences the work, and makes review possible. This is where chat behavior becomes operator behavior.',
+        title: 'Planlama hareketi kontrollü uygulamaya dönüştürür.',
+        note: 'Arka plan yapılandırılmış bir planlama odasına dönüşür: kutular, oklar, bağımlılıklar ve sınırlı sonraki adımlar.',
+        themeLabel: 'planlama odası',
+        action: 'Değişiklikten önce yolu kur',
+        background: 'bağlı plan kutuları, yön okları, sınırlı adımlar',
+        narration: 'Kısa ve açık bir plan varsayımları ortaya çıkarır, işi sıralar ve gözden geçirmeyi mümkün kılar. Sohbet davranışının operatör davranışına dönüştüğü yer burasıdır.',
         duration: 7000,
         mode: 'plan',
-        pulse: 'measured',
-        mood: 'architected'
+        pulse: 'ölçülü',
+        mood: 'kurulmuş'
       },
 
       {
         id: 'tool-execution',
         short: 'Uygula',
-        title: 'Then tools connect the agent to reality.',
-        note: 'Terminal, files, web, browser, and task rails appear behind the moving agent.',
-        themeLabel: 'tool bay',
-        action: 'Execute deliberately with tools',
-        background: 'terminal panes, browser frames, file grids and command pulses',
-        narration: 'Now Hermes acts with evidence. It can inspect files, run commands, browse the web, and track tasks. This is grounded execution, not plausible text generation.',
+        title: 'Sonra araçlar ajanı gerçekliğe bağlar.',
+        note: 'Hareket eden ajanın arkasında terminal, dosyalar, web, tarayıcı ve görev rayları belirir.',
+        themeLabel: 'araç bölmesi',
+        action: 'Araçlarla kasıtlı uygula',
+        background: 'terminal panelleri, tarayıcı çerçeveleri, dosya ızgaraları ve komut darbeleri',
+        narration: 'Artık Hermes kanıtla hareket ediyor. Dosyaları inceleyebilir, komut çalıştırabilir, web’i gezebilir ve görevleri takip edebilir. Bu, makul metin üretimi değil, somut uygulamadır.',
         duration: 7000,
         mode: 'tools',
-        pulse: 'engaged',
-        mood: 'kinetic'
+        pulse: 'devrede',
+        mood: 'hareketli'
       },
 
       {
         id: 'skill-forge',
         short: 'Biriktir',
-        title: 'What works gets forged into a system.',
-        note: 'The agent moves through a forge of patterns, templates, and skills.',
-        themeLabel: 'skill forge',
-        action: 'Capture reusable workflows',
-        background: 'forging sparks, pattern lattices, reusable modules',
-        narration: 'A one-off success is fragile. A saved workflow compounds. Hermes turns stable patterns into reusable skills, templates, checklists, and operator memory.',
+        title: 'İşe yarayan şey sisteme dövülür.',
+        note: 'Ajan kalıplar, şablonlar ve beceriler ocağından geçer.',
+        themeLabel: 'beceri ocağı',
+        action: 'Yeniden kullanılabilir akışları yakala',
+        background: 'dövme kıvılcımları, desen örgüleri, yeniden kullanılabilir modüller',
+        narration: 'Tek seferlik başarı kırılgandır. Kaydedilmiş iş akışı birikir. Hermes, istikrarlı kalıpları yeniden kullanılabilir becerilere, şablonlara, kontrol listelerine ve operatör hafızasına dönüştürür.',
         duration: 7000,
         mode: 'forge',
-        pulse: 'forging',
-        mood: 'transformative'
+        pulse: 'dövülüyor',
+        mood: 'dönüştürücü'
       },
 
       {
         id: 'automation-orbit',
         short: 'Otomatikleştir',
-        title: 'Finally, recurring work leaves chat and enters orbit.',
-        note: 'Schedulers, delegated cycles, and calm recurring loops surround the living agent.',
-        themeLabel: 'automation orbit',
-        action: 'Otomatikleştir the stable parts',
-        background: 'orbital rings, scheduler dots, recurring dispatch routes',
-        narration: 'The mature system does not repeat stable work manually forever. It schedules jobs, delegates tasks, and turns useful motion into reliable ongoing operation.',
+        title: 'Sonunda tekrarlayan iş sohbetten çıkar ve yörüngeye girer.',
+        note: 'Zamanlayıcılar, delege döngüleri ve sakin tekrar halkaları yaşayan ajanı çevreler.',
+        themeLabel: 'otomasyon yörüngesi',
+        action: 'İstikrarlı kısımları otomatikleştir',
+        background: 'yörünge halkaları, zamanlayıcı noktaları, tekrarlayan sevk rotaları',
+        narration: 'Olgun sistem istikrarlı işi sonsuza kadar elle tekrarlamaz. İşleri zamanlar, görevleri delege eder ve yararlı hareketi güvenilir sürekli operasyona dönüştürür.',
         duration: 7600,
         mode: 'orbit',
-        pulse: 'autonomous',
-        mood: 'orbital'
+        pulse: 'özerk',
+        mood: 'yörüngesel'
       }
     ];
 
@@ -1396,7 +1396,7 @@
       const bubbles = [
         'prompt?',
         'try again',
-        'more context?',
+        'daha fazla bağlam?',
         'rewrite',
         'one shot',
         'guessing...'
@@ -1412,10 +1412,10 @@
     function drawMemory(grid, t) {
       for (let y = 2; y < ROWS - 1; y += 4) {
         for (let x = 2; x < COLS - 2; x += 14) {
-          drawBox(grid, x, y, 12, 3, 'context');
+          drawBox(grid, x, y, 12, 3, 'bağlam');
         }
       }
-      const labels = ['who you are', 'project', 'goals', 'constraints', 'safe zones'];
+      const labels = ['sen kimsin', 'proje', 'hedefler', 'kısıtlar', 'güvenli alanlar'];
       labels.forEach((txt, i) => writeText(grid, 3 + i * 13, 19 - (i % 2), txt.slice(0, 11)));
       for (let i = 0; i < 12; i++) {
         const x = 5 + i * 5;
@@ -1425,24 +1425,24 @@
       writeCentered(grid, 1, 'KALICI BAĞLAM / hafıza rayları / doğruluk kaynağı');
     }
 
-    function drawİncele(grid, t) {
-      drawBox(grid, 2, 3, 22, 15, 'repo map');
+    function drawInspect(grid, t) {
+      drawBox(grid, 2, 3, 22, 15, 'repo haritası');
       const tree = ['docs/', 'agents/', 'tasks/', 'README.md', 'HERMES.md', 'skills/'];
       tree.forEach((line, i) => writeText(grid, 4, 5 + i * 2, '├─ ' + line));
-      drawBox(grid, 43, 4, 24, 13, 'scan log');
-      const scan = ['read docs', 'search files', 'verify paths', 'inspect status', 'map risks'];
+      drawBox(grid, 43, 4, 24, 13, 'tarama günlüğü');
+      const scan = ['doküman oku', 'dosya ara', 'yolları doğrula', 'durumu incele', 'riskleri haritala'];
       scan.forEach((line, i) => writeText(grid, 45, 6 + i * 2, '[' + (i < (t % 8) ? 'x' : ' ') + '] ' + line));
       const beamX = 15 + ((t * 3) % 9);
       for (let y = 4; y < 17; y++) setChar(grid, beamX, y, '│');
       writeCentered(grid, 1, 'ÖNCE İNCELE / değiştirmeden önce durumu oku');
     }
 
-    function drawPlanla(grid, t) {
-      drawBox(grid, 4, 5, 18, 5, '1. inspect');
-      drawBox(grid, 27, 4, 18, 6, '2. plan');
-      drawBox(grid, 50, 5, 18, 5, '3. act');
-      drawBox(grid, 17, 14, 18, 5, '4. verify');
-      drawBox(grid, 40, 14, 20, 5, '5. preserve');
+    function drawPlan(grid, t) {
+      drawBox(grid, 4, 5, 18, 5, '1. incele');
+      drawBox(grid, 27, 4, 18, 6, '2. planla');
+      drawBox(grid, 50, 5, 18, 5, '3. uygula');
+      drawBox(grid, 17, 14, 18, 5, '4. doğrula');
+      drawBox(grid, 40, 14, 20, 5, '5. koru');
       writeText(grid, 22, 7, '=====>');
       writeText(grid, 45, 7, '=====>');
       writeText(grid, 31, 12, 'v');
@@ -1450,23 +1450,23 @@
       writeText(grid, 27, 16, '------->');
       const pulseX = [20, 43, 31, 50][t % 4];
       setChar(grid, pulseX, 12, '●');
-      writeCentered(grid, 1, 'DEĞİŞİKLİKTEN ÖNCE PLAN / sınırlı adımlar / düşük etki alanı');
+      writeCentered(grid, 1, 'DEĞİŞİKLİKTEN ÖNCE PLANLA / sınırlı adımlar / düşük etki alanı');
     }
 
     function drawTools(grid, t) {
       drawBox(grid, 2, 3, 22, 8, 'terminal');
-      drawBox(grid, 26, 3, 20, 8, 'files');
-      drawBox(grid, 48, 3, 22, 8, 'browser');
+      drawBox(grid, 26, 3, 20, 8, 'dosyalar');
+      drawBox(grid, 48, 3, 22, 8, 'tarayıcı');
       drawBox(grid, 14, 14, 18, 7, 'web');
-      drawBox(grid, 38, 14, 20, 7, 'tasks');
-      writeText(grid, 4, 5, '$ inspect repo');
-      writeText(grid, 4, 7, '$ run checks');
+      drawBox(grid, 38, 14, 20, 7, 'görevler');
+      writeText(grid, 4, 5, '$ repoyu incele');
+      writeText(grid, 4, 7, '$ kontrolleri çalıştır');
       writeText(grid, 28, 5, 'README.md');
       writeText(grid, 28, 7, 'outline.md');
-      writeText(grid, 50, 5, '[ page ] [ click ]');
-      writeText(grid, 50, 7, '[ verify reality ]');
-      writeText(grid, 16, 16, 'search -> extract -> compare');
-      writeText(grid, 40, 16, '[todo] [delegate] [report]');
+      writeText(grid, 50, 5, '[ sayfa ] [ tıkla ]');
+      writeText(grid, 50, 7, '[ gerçekliği doğrula ]');
+      writeText(grid, 16, 16, 'ara -> çıkar -> karşılaştır');
+      writeText(grid, 40, 16, '[todo] [delege] [raporla]');
       const pulse = 4 + (t % 16);
       writeText(grid, pulse, 9, '>>>>>>>>');
       writeCentered(grid, 1, 'ARAÇLAR İŞİ SOMUTLAR / gerçeklik > makul metin');
@@ -1474,15 +1474,15 @@
 
     function drawForge(grid, t) {
       for (let i = 0, x = 5; x < COLS - 5; x += 12, i++) {
-        drawBox(grid, x, 4 + (i % 2), 10, 4, 'skill');
+        drawBox(grid, x, 4 + (i % 2), 10, 4, 'beceri');
       }
       for (let i = 0; i < 18; i++) {
         const x = (i * 7 + t * 3) % (COLS - 4) + 2;
         const y = 3 + ((i * 5 + t) % 15);
         setChar(grid, x, y, ['*', '+', '·', 'x'][i % 4]);
       }
-      writeText(grid, 10, 18, 'template  ->  checklist  ->  automation candidate');
-      writeText(grid, 20, 20, '[capture]  [reuse]  [refine]');
+      writeText(grid, 10, 18, 'şablon  ->  kontrol listesi  ->  otomasyon adayı');
+      writeText(grid, 20, 20, '[yakala]  [yeniden kullan]  [iyileştir]');
       writeCentered(grid, 1, 'BECERİ OCAĞI / işe yarayan yeniden kullanılabilir yapıya dönüşür');
     }
 
@@ -1499,9 +1499,9 @@
         }
       });
       writeText(grid, 8, 4, 'cron');
-      writeText(grid, 56, 4, 'delegate');
-      writeText(grid, 8, 20, 'report');
-      writeText(grid, 54, 20, 'repeat');
+      writeText(grid, 56, 4, 'delege');
+      writeText(grid, 8, 20, 'rapor');
+      writeText(grid, 54, 20, 'tekrar');
       writeCentered(grid, 1, 'OTOMASYON YÖRÜNGESİ / tekrarlayan iş canlı sohbetten çıkar');
     }
 
@@ -1510,8 +1510,8 @@
       const grid = makeGrid(' ');
       if (scene.mode === 'chaos') drawChaos(grid, t);
       if (scene.mode === 'memory') drawMemory(grid, t);
-      if (scene.mode === 'inspect') drawİncele(grid, t);
-      if (scene.mode === 'plan') drawPlanla(grid, t);
+      if (scene.mode === 'inspect') drawInspect(grid, t);
+      if (scene.mode === 'plan') drawPlan(grid, t);
       if (scene.mode === 'tools') drawTools(grid, t);
       if (scene.mode === 'forge') drawForge(grid, t);
       if (scene.mode === 'orbit') drawOrbit(grid, t);
@@ -1552,7 +1552,7 @@
       captionTitle.textContent = scene.title;
       captionMode.textContent = scene.short;
       captionTheme.textContent = 'Theme: ' + scene.themeLabel;
-      captionUygulaionValue.textContent = scene.action;
+      captionActionValue.textContent = scene.action;
       captionBackgroundValue.textContent = scene.background;
       sceneCounter.textContent = 'Scene ' + (index + 1) + ' / ' + scenes.length;
       agentPulse.textContent = scene.pulse || 'steady';
@@ -1606,12 +1606,12 @@
       drawFrame(true);
     }
 
-    function toggleOynatback() {
+    function togglePlayback() {
       playing = !playing;
-      playDuraklatBtn.textContent = playing ? 'Duraklat' : 'Oynat';
+      playPauseBtn.textContent = playing ? 'Duraklat' : 'Oynat';
     }
 
-    function restartOynatback() {
+    function restartOynatma() {
       activeScene = 0;
       frameTick = 0;
       sceneStartedAt = Date.now();
@@ -1632,8 +1632,8 @@
 
     buildSceneList();
     updateSceneMeta(activeScene);
-    playDuraklatBtn.addEventListener('click', toggleOynatback);
-    restartBtn.addEventListener('click', restartOynatback);
+    playPauseBtn.addEventListener('click', togglePlayback);
+    restartBtn.addEventListener('click', restartOynatma);
     speakBtn.addEventListener('click', speakScene);
     startLoop();
   </script>
