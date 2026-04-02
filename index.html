@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes Zero-to-Hero — From Chat User to Agent Operator</title>
+  <meta name="description" content="The real upgrade is not better prompts. It's becoming an agent operator. A visual guide by NeuraByte Labs.">
+  <meta property="og:title" content="Hermes Zero-to-Hero — From Chat User to Agent Operator">
+  <meta property="og:description" content="Stop using Hermes like a chatbot. Learn to inspect, plan, and act like an operator.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hermes-guide.neurabytelabs.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:creator" content="@0xsarac">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+      --bg: #f6f1ea;
+      --surface: rgba(255,255,255,0.9);
+      --text: #1f2937;
+      --text-dim: #5f6b7a;
+      --deep-blue: #1e3a5f;
+      --deep-blue-dim: rgba(30, 58, 95, 0.08);
+      --gold: #b6842b;
+      --border: rgba(30, 58, 95, 0.12);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #101820;
+        --surface: rgba(24, 37, 51, 0.92);
+        --text: #eef3f7;
+        --text-dim: #aeb9c4;
+        --deep-blue: #8fb3d9;
+        --deep-blue-dim: rgba(143, 179, 217, 0.12);
+        --gold: #dfb865;
+        --border: rgba(255,255,255,0.08);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: var(--font-body);
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, var(--deep-blue-dim), transparent 28%),
+        linear-gradient(180deg, var(--bg), var(--bg));
+    }
+
+    .splash {
+      text-align: center;
+      padding: 60px 24px;
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(42px, 7vw, 72px);
+      line-height: .95;
+      letter-spacing: -0.04em;
+      margin: 0 0 20px;
+    }
+
+    .sub {
+      font-size: 18px;
+      color: var(--text-dim);
+      max-width: 48ch;
+      margin: 0 auto 36px;
+      line-height: 1.5;
+    }
+
+    .lang-links {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .lang-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .lang-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .lang-link strong {
+      font-size: 16px;
+    }
+
+    .footer {
+      margin-top: 48px;
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .footer a {
+      color: var(--deep-blue);
+    }
+  </style>
+</head>
+<body>
+  <div class="splash">
+    <div class="eyebrow">NeuraByte Labs Guides</div>
+    <h1>Don't just prompt better.<br>Operate better.</h1>
+    <p class="sub">The real upgrade is not better prompts. It's becoming an agent operator. A visual guide to using Hermes the right way.</p>
+    <div class="lang-links">
+      <a href="/en/" class="lang-link"><strong>English</strong> Read the guide</a>
+      <a href="/tr/" class="lang-link"><strong>Turkce</strong> Rehberi oku</a>
+    </div>
+    <div class="footer">
+      <p>By <a href="https://twitter.com/0xsarac">Mustafa Sarac</a> · <a href="https://neurabytelabs.com">NeuraByte Labs</a></p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hermes Zero-to-Hero — From Chat User to Agent Operator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+      --font-display: 'Instrument Serif', Georgia, serif;
+      --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+
+      --bg: #f6f1ea;
+      --surface: rgba(255,255,255,0.74);
+      --surface-elevated: rgba(255,255,255,0.9);
+      --surface-strong: #fffdf9;
+      --border: rgba(30, 58, 95, 0.12);
+      --border-bright: rgba(30, 58, 95, 0.2);
+      --text: #1f2937;
+      --text-dim: #5f6b7a;
+      --deep-blue: #1e3a5f;
+      --deep-blue-dim: rgba(30, 58, 95, 0.08);
+      --gold: #b6842b;
+      --gold-dim: rgba(182, 132, 43, 0.12);
+      --sage: #56705d;
+      --sage-dim: rgba(86, 112, 93, 0.12);
+      --red: #a14735;
+      --red-dim: rgba(161, 71, 53, 0.1);
+      --shadow: 0 18px 48px rgba(30, 58, 95, 0.08);
+      --radius: 18px;
+      --hero-radius: 28px;
+      --terminal-bg: #0f1720;
+      --terminal-panel: rgba(255,255,255,0.06);
+      --terminal-border: rgba(255,255,255,0.1);
+      --terminal-text: #dce8f4;
+      --terminal-dim: #89a2ba;
+      --terminal-accent: #8dd3ff;
+      --terminal-gold: #f7cf80;
+      --terminal-green: #8be2ae;
+      --terminal-red: #ff9a8e;
+      --cinema-glow: rgba(141,211,255,0.14);
+      --cinema-wash: rgba(141,211,255,0.08);
+      --cinema-accent: #8dd3ff;
+      --cinema-accent-2: #f7cf80;
+    }
+
+    [data-theme="dark"] {
+      --bg: #101820;
+      --surface: rgba(21, 32, 43, 0.78);
+      --surface-elevated: rgba(24, 37, 51, 0.92);
+      --surface-strong: #16212d;
+      --border: rgba(255,255,255,0.08);
+      --border-bright: rgba(255,255,255,0.14);
+      --text: #eef3f7;
+      --text-dim: #aeb9c4;
+      --deep-blue: #8fb3d9;
+      --deep-blue-dim: rgba(143, 179, 217, 0.12);
+      --gold: #dfb865;
+      --gold-dim: rgba(223, 184, 101, 0.12);
+      --sage: #8ab08f;
+      --sage-dim: rgba(138, 176, 143, 0.12);
+      --red: #d38b78;
+      --red-dim: rgba(211, 139, 120, 0.12);
+      --shadow: 0 20px 50px rgba(0,0,0,0.28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, var(--gold-dim), transparent 28%),
+        radial-gradient(circle at 85% 20%, var(--deep-blue-dim), transparent 32%),
+        linear-gradient(180deg, color-mix(in srgb, var(--bg) 92%, white 8%), var(--bg));
+      line-height: 1.6;
+    }
+
+    a { color: var(--deep-blue); }
+    .page {
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 28px 22px 80px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 12px;
+      z-index: 30;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      margin-bottom: 26px;
+      background: color-mix(in srgb, var(--surface-elevated) 85%, transparent 15%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar__brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.8px;
+      color: var(--gold);
+    }
+
+    .brand-title {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .topbar__actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .pill, .theme-toggle, .cinema-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+
+    .theme-toggle, .cinema-btn {
+      cursor: pointer;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .hero-card {
+      background: color-mix(in srgb, var(--surface-elevated) 90%, transparent 10%);
+      border: 1px solid var(--border);
+      border-radius: var(--hero-radius);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      min-width: 0;
+      animation: fadeUp .55s ease-out both;
+    }
+
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      inset: auto -120px -120px auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--deep-blue-dim), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(52px, 7vw, 96px);
+      line-height: .95;
+      letter-spacing: -0.04em;
+      margin: 10px 0 18px;
+    }
+
+    .hero .subtitle {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--deep-blue);
+      margin-bottom: 14px;
+    }
+
+    .hero .lede {
+      font-size: clamp(18px, 2vw, 24px);
+      max-width: 24ch;
+      line-height: 1.35;
+      margin-bottom: 18px;
+    }
+
+    .hero .micro {
+      color: var(--text-dim);
+      max-width: 56ch;
+      font-size: 15px;
+    }
+
+    .signal-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .signal {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      animation: fadeScale .45s ease-out both;
+    }
+
+    .signal:nth-child(1) { animation-delay: .08s; }
+    .signal:nth-child(2) { animation-delay: .16s; }
+    .signal:nth-child(3) { animation-delay: .24s; }
+
+    .signal .label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .signal .value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .signal .note {
+      margin-top: 6px;
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 24px;
+      animation: fadeUp .55s ease-out both;
+    }
+
+    .section-card {
+      background: color-mix(in srgb, var(--surface) 88%, transparent 12%);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: flex-end;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .section-head h2 {
+      margin: 6px 0 0;
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-dim);
+      max-width: 60ch;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .ve-card {
+      min-width: 0;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      animation: fadeUp .45s ease-out both;
+    }
+
+    .ve-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(0,0,0,0.08);
+      border-color: var(--border-bright);
+    }
+
+    .ve-card__label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--deep-blue);
+      margin-bottom: 12px;
+    }
+
+    .ve-card__label::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .ve-card__title {
+      font-size: 28px;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      font-weight: 700;
+    }
+
+    .ve-card__copy {
+      color: var(--text-dim);
+      font-size: 15px;
+      margin: 0 0 12px;
+    }
+
+    .callout {
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      margin-top: 12px;
+      font-family: var(--font-mono);
+      background: var(--deep-blue-dim);
+      color: var(--deep-blue);
+    }
+
+    .callout--danger { background: var(--red-dim); color: var(--red); }
+    .callout--gold { background: var(--gold-dim); color: var(--gold); }
+    .callout--sage { background: var(--sage-dim); color: var(--sage); }
+
+    .diff-panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .diff-panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--surface-elevated);
+    }
+
+    .diff-panel__header {
+      padding: 12px 16px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .diff-panel__header--before {
+      background: var(--red-dim);
+      color: var(--red);
+    }
+
+    .diff-panel__header--after {
+      background: var(--sage-dim);
+      color: var(--sage);
+    }
+
+    .diff-panel__body {
+      padding: 18px 18px 10px;
+    }
+
+    .node-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .node-list li {
+      position: relative;
+      padding-left: 16px;
+      color: var(--text-dim);
+    }
+
+    .node-list li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .pipeline__step {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+      min-width: 0;
+      position: relative;
+    }
+
+    .pipeline__num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--deep-blue-dim);
+      color: var(--deep-blue);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .pipeline__title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .pipeline__step p {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .operators {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .big-quote {
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, color-mix(in srgb, var(--surface-elevated) 88%, transparent 12%), var(--surface-strong));
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .big-quote blockquote {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(34px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .big-quote p {
+      margin: 16px 0 0;
+      color: var(--text-dim);
+      max-width: 46ch;
+    }
+
+    .kpi-stack {
+      display: grid;
+      gap: 14px;
+    }
+
+    .kpi {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .kpi .kpi-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.3px;
+      color: var(--text-dim);
+    }
+
+    .kpi .kpi-value {
+      font-size: 30px;
+      line-height: 1.05;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-top: 6px;
+    }
+
+    .footer-note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .footer-note strong { color: var(--text); }
+
+    .cinema-wrap {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .section-head--cinema {
+      align-items: flex-start;
+    }
+
+    .section-head__main {
+      min-width: 0;
+    }
+
+    .section-head__aside {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      min-width: 220px;
+    }
+
+    .cinema-terminal {
+      display: flex;
+      flex-direction: column;
+      background:
+        radial-gradient(circle at 50% 0%, var(--cinema-glow), transparent 34%),
+        linear-gradient(180deg, rgba(8,13,19,0.98), rgba(14,22,31,0.98));
+      color: var(--terminal-text);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: hidden;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.22);
+      transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
+    }
+
+    .terminal-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--terminal-border);
+      background: rgba(255,255,255,0.03);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--terminal-dim);
+    }
+
+    .terminal-title {
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 0 10px;
+    }
+
+    .terminal-counter {
+      flex-shrink: 0;
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .terminal-dots span:nth-child(1) { background: #ff6b5f; }
+    .terminal-dots span:nth-child(2) { background: #ffbd2f; }
+    .terminal-dots span:nth-child(3) { background: #28c840; }
+
+    .ascii-stage {
+      display: flex;
+      flex-direction: column;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 50% 0%, var(--cinema-glow), transparent 30%),
+        linear-gradient(180deg, var(--cinema-wash), transparent 50%);
+      transition: background .35s ease;
+    }
+
+    .ascii-screen {
+      margin: 0;
+      min-height: 24em;
+      white-space: pre;
+      overflow: auto hidden;
+      font-family: var(--font-mono);
+      font-size: 11.3px;
+      line-height: 1.08;
+      color: var(--terminal-text);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+        repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px),
+        rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 0 26px rgba(0,0,0,0.18), 0 0 24px var(--cinema-glow);
+      transition: box-shadow .35s ease, border-color .35s ease, transform .35s ease;
+    }
+
+    .caption-bar {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .caption-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+      color: var(--terminal-dim);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+    }
+
+    .caption-mode {
+      color: var(--terminal-text);
+    }
+
+    .caption-title {
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 600;
+      color: var(--terminal-text);
+      letter-spacing: -0.02em;
+    }
+
+    .caption-copy {
+      color: var(--terminal-text);
+      opacity: 0.9;
+      font-size: 14px;
+      min-height: 3.2em;
+    }
+
+    .caption-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .caption-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--terminal-dim);
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .caption-tag strong { color: var(--terminal-text); font-weight: 600; }
+
+    .cinema-progress {
+      margin-top: 12px;
+      height: 8px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cinema-progress__bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--cinema-accent), var(--cinema-accent-2));
+      box-shadow: 0 0 18px var(--cinema-glow);
+      transition: width .12s linear, background .35s ease;
+    }
+
+    .cinema-status {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--terminal-dim);
+    }
+
+    .cinema-status strong {
+      color: var(--terminal-text);
+      font-weight: 600;
+    }
+
+    .cinema-sidebar {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .cinema-panel {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow);
+    }
+
+    .cinema-panel h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .cinema-panel p {
+      margin: 0;
+      color: var(--text-dim);
+      font-size: 14px;
+    }
+
+    .cinema-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .cinema-controls--header {
+      margin-top: 0;
+      justify-content: flex-end;
+    }
+
+    .cinema-btn--accent {
+      background: var(--deep-blue);
+      color: white;
+      border-color: transparent;
+    }
+
+    .scene-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .scene-pill {
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--surface) 92%, transparent 8%);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 10px 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+    }
+
+    .scene-pill:hover {
+      transform: translateY(-1px);
+      border-color: var(--border-bright);
+    }
+
+    .scene-pill.is-active {
+      border-color: color-mix(in srgb, var(--deep-blue) 36%, var(--border));
+      background: var(--deep-blue-dim);
+    }
+
+    .scene-pill__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-dim);
+      margin-bottom: 4px;
+    }
+
+    .scene-pill__title {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-bottom: 0;
+    }
+
+    .cinema-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .metric-chip {
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--surface-strong);
+    }
+
+    .metric-chip__label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-dim);
+    }
+
+    .metric-chip__value {
+      font-size: 18px;
+      line-height: 1.1;
+      margin-top: 6px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeScale {
+      from { opacity: 0; transform: scale(.96); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+
+    @media (max-width: 960px) {
+      .hero, .operators, .cinema-wrap { grid-template-columns: 1fr; }
+      .pipeline { grid-template-columns: 1fr; }
+      .mini-grid, .diff-panels { grid-template-columns: 1fr; }
+      .topbar { position: static; }
+      .cinema-metrics { grid-template-columns: 1fr 1fr; }
+      .section-head__aside {
+        width: 100%;
+        min-width: 0;
+        align-items: flex-start;
+      }
+      .cinema-controls--header { justify-content: flex-start; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding: 16px 14px 64px; }
+      .hero-card, .section-card, .big-quote { padding: 20px; }
+      .ve-card__title { font-size: 24px; }
+      .topbar { align-items: flex-start; }
+      .topbar__actions { justify-content: flex-start; }
+      .ascii-screen { font-size: 9.4px; }
+      .cinema-metrics { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <div class="topbar__brand">
+        <div class="eyebrow">Hermes / Public Guide / v2</div>
+        <div class="brand-title">Hermes Zero-to-Hero — from chat user to agent operator</div>
+      </div>
+      <div class="topbar__actions">
+        <a class="pill" href="#mindset">Mindset shift</a>
+        <a class="pill" href="#ascii-cinema">ASCII cinema</a>
+        <a class="pill" href="#workflow">Workflow</a>
+        <a class="pill" href="#progression">Progression</a>
+        <button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="subtitle">Hermes Zero-to-Hero</div>
+        <h1>Don’t just prompt better.<br>Operate better.</h1>
+        <div class="lede"><strong>The real upgrade is not better prompts.</strong> It’s becoming an agent operator.</div>
+        <div class="micro">Use Hermes to build a personal operating system for execution: durable context, inspection before action, planning before change, and workflows that compound instead of resetting to zero every time.</div>
+      </div>
+      <div class="signal-stack">
+        <div class="signal">
+          <div class="label">Audience</div>
+          <div class="value">AI-native founders & operators</div>
+          <div class="note">People already using AI, but still trapped in isolated chats.</div>
+        </div>
+        <div class="signal">
+          <div class="label">Primary hook</div>
+          <div class="value">Inspect → Plan → Act</div>
+          <div class="note">Simple enough to remember. Strong enough to change outcomes.</div>
+        </div>
+        <div class="signal">
+          <div class="label">Transformation</div>
+          <div class="value">Chat user → agent operator</div>
+          <div class="note">Less prompt roulette. More repeatable leverage.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mindset">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Section 1</div>
+            <h2>Break the wrong model first</h2>
+          </div>
+          <p>If the mental model is wrong, every feature gets used badly. Hermes is not most powerful as a chat box. It becomes valuable when it works inside a real operating frame.</p>
+        </div>
+        <div class="diff-panels">
+          <div class="diff-panel">
+            <div class="diff-panel__header diff-panel__header--before">Wrong model</div>
+            <div class="diff-panel__body">
+              <ul class="node-list">
+                <li>Ask isolated questions</li>
+                <li>Restart context every time</li>
+                <li>Hope one prompt solves everything</li>
+                <li>Request action before inspection</li>
+                <li>Repeat successful work manually forever</li>
+              </ul>
+              <div class="callout callout--danger">This creates plausible answers, inconsistent outcomes, and chaos disguised as productivity.</div>
+            </div>
+          </div>
+          <div class="diff-panel">
+            <div class="diff-panel__header diff-panel__header--after">Right model</div>
+            <div class="diff-panel__body">
+              <ul class="node-list">
+                <li>Give durable context</li>
+                <li>Inspect the current state first</li>
+                <li>Plan before changing anything</li>
+                <li>Use tools to verify reality</li>
+                <li>Capture what works and automate repetition</li>
+              </ul>
+              <div class="callout callout--sage">This turns Hermes from a clever responder into part of your operating system.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="ascii-cinema">
+      <div class="section-card">
+        <div class="section-head section-head--cinema">
+          <div class="section-head__main">
+            <div class="eyebrow">Section 2</div>
+            <h2>ASCII cinema — a living Hermes agent</h2>
+            <p>This embedded ASCII video narrates the full process: from chaotic chat usage to durable context, inspection, planning, execution, system capture, and automation. The background changes with every scene so the visual field always matches the meaning.</p>
+          </div>
+          <div class="section-head__aside">
+            <div class="eyebrow">Playback</div>
+            <div class="cinema-controls cinema-controls--header">
+              <button class="cinema-btn cinema-btn--accent" id="playPauseBtn" type="button">Pause</button>
+              <button class="cinema-btn" id="restartBtn" type="button">Restart</button>
+              <button class="cinema-btn" id="speakBtn" type="button">Speak</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cinema-wrap">
+          <div class="cinema-terminal">
+            <div class="terminal-bar">
+              <div class="terminal-dots"><span></span><span></span><span></span></div>
+              <div class="terminal-title">Hermes ASCII cinema / living agent walkthrough</div>
+              <div class="terminal-counter" id="sceneCounter">Scene 1 / 7</div>
+            </div>
+            <div class="ascii-stage">
+              <pre class="ascii-screen" id="asciiScreen" aria-live="polite"></pre>
+              <div class="caption-bar">
+                <div class="caption-head">
+                  <div class="caption-mode" id="captionMode">Wrong model</div>
+                  <div id="captionTheme">Theme: chat chaos</div>
+                </div>
+                <div class="caption-title" id="captionTitle">Most people start in chat chaos.</div>
+                <div class="caption-copy" id="captionCopy">Hermes is being used like a chatbot, so context keeps resetting and the system never compounds. The agent is alive, but it is trapped in shallow requests.</div>
+                <div class="caption-meta">
+                  <div class="caption-tag"><strong id="captionAction">Action</strong> <span id="captionActionValue">Recognize the wrong model</span></div>
+                  <div class="caption-tag"><strong id="captionBackground">Background</strong> <span id="captionBackgroundValue">message storms and broken threads</span></div>
+                </div>
+                <div class="cinema-progress" aria-hidden="true"><div class="cinema-progress__bar" id="sceneProgress"></div></div>
+                <div class="cinema-status">
+                  <div>agent pulse <strong id="agentPulse">unstable</strong></div>
+                  <div>visual mood <strong id="sceneMood">fractured</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cinema-sidebar">
+            <div class="cinema-panel">
+              <div class="eyebrow">Scenes / 7 beats</div>
+              <div class="scene-list" id="sceneList"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Section 3</div>
+            <h2>The operating model</h2>
+          </div>
+          <p>These are the behaviors that make Hermes useful in real work, not just entertaining in a chat window.</p>
+        </div>
+        <div class="mini-grid">
+          <article class="ve-card">
+            <div class="ve-card__label">01 / Reframe</div>
+            <h3 class="ve-card__title">Hermes is not just a chatbot.</h3>
+            <p class="ve-card__copy">It becomes powerful when it can carry context, inspect reality, use tools, and help run the work.</p>
+            <div class="callout">Answers are the floor. Execution is the point.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">02 / Identity shift</div>
+            <h3 class="ve-card__title">Think like an operator, not a prompter.</h3>
+            <p class="ve-card__copy">The goal is not better wording. The goal is better execution.</p>
+            <div class="callout callout--gold">Stop chasing magic prompts. Start designing reliable workflows.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">03 / Context</div>
+            <h3 class="ve-card__title">Start with durable context.</h3>
+            <p class="ve-card__copy">Tell Hermes who you are, what the project is, what matters now, what success looks like, and what should not be touched.</p>
+            <div class="callout">No context = shallow execution.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">04 / Inspection</div>
+            <h3 class="ve-card__title">Inspect before action.</h3>
+            <p class="ve-card__copy">Before changing files, running commands, or making decisions, ask Hermes to inspect the current state.</p>
+            <div class="callout callout--sage">Read first. Change second.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">05 / Planning</div>
+            <h3 class="ve-card__title">Plan before change.</h3>
+            <p class="ve-card__copy">A short plan reduces chaos, exposes assumptions, and lowers blast radius. You do not need a huge spec. You need a clear path.</p>
+            <div class="callout callout--gold">Less improvisation. More control.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">06 / Tool use</div>
+            <h3 class="ve-card__title">Use tools to ground the work.</h3>
+            <p class="ve-card__copy">Terminal. Files. Web. Browser. Task tracking. Delegation. Grounded execution beats plausible text every time.</p>
+            <div class="callout callout--danger">If reality can be checked, don’t settle for guessing.</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Section 4</div>
+            <h2>The compounding workflow</h2>
+          </div>
+          <p>Good Hermes usage is not a sequence of lucky chats. It is a repeatable operating loop that compounds over time.</p>
+        </div>
+        <div class="pipeline">
+          <div class="pipeline__step">
+            <div class="pipeline__num">1</div>
+            <div class="pipeline__title">Context</div>
+            <p>Load stable information about you, the project, constraints, and source-of-truth locations.</p>
+          </div>
+          <div class="pipeline__step">
+            <div class="pipeline__num">2</div>
+            <div class="pipeline__title">Inspect</div>
+            <p>Read docs, search files, verify assumptions, and map the current state before touching anything.</p>
+          </div>
+          <div class="pipeline__step">
+            <div class="pipeline__num">3</div>
+            <div class="pipeline__title">Plan</div>
+            <p>Break the work into controlled steps, surface risks, and make the sequence reviewable.</p>
+          </div>
+          <div class="pipeline__step">
+            <div class="pipeline__num">4</div>
+            <div class="pipeline__title">Act</div>
+            <p>Execute deliberately, report changes clearly, and stop when something becomes risky.</p>
+          </div>
+          <div class="pipeline__step">
+            <div class="pipeline__num">5</div>
+            <div class="pipeline__title">Compound</div>
+            <p>Turn good outcomes into reusable skills, templates, checklists, and recurring automations.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="progression">
+      <div class="operators">
+        <div class="big-quote">
+          <div class="eyebrow">Section 5</div>
+          <blockquote>Build your personal operating system.</blockquote>
+          <p>Hermes becomes powerful when it stops being a chatbot and starts becoming part of how you execute. The real win is not a better answer. It is a calmer, faster, more repeatable way to move work through reality.</p>
+        </div>
+        <div class="kpi-stack">
+          <div class="kpi">
+            <div class="kpi-label">Progression</div>
+            <div class="kpi-value">Chat user</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Then</div>
+            <div class="kpi-value">Structured user</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Then</div>
+            <div class="kpi-value">Context-aware operator</div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label">Then</div>
+            <div class="kpi-value">System builder</div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-note"><strong>Final line:</strong> The real upgrade is not better prompts. It’s becoming an agent operator. Use Hermes to inspect first, plan clearly, act deliberately, and turn what works into durable systems.</div>
+    </section>
+  </div>
+
+  <script>
+    function toggleTheme() {
+      const root = document.documentElement;
+      const current = root.getAttribute('data-theme') || 'light';
+      root.setAttribute('data-theme', current === 'light' ? 'dark' : 'light');
+    }
+
+    const asciiScreen = document.getElementById('asciiScreen');
+    const captionTitle = document.getElementById('captionTitle');
+    const captionCopy = document.getElementById('captionCopy');
+    const captionTheme = document.getElementById('captionTheme');
+    const captionActionValue = document.getElementById('captionActionValue');
+    const captionBackgroundValue = document.getElementById('captionBackgroundValue');
+    const sceneCounter = document.getElementById('sceneCounter');
+    const sceneList = document.getElementById('sceneList');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const restartBtn = document.getElementById('restartBtn');
+    const speakBtn = document.getElementById('speakBtn');
+    const sceneProgress = document.getElementById('sceneProgress');
+    const agentPulse = document.getElementById('agentPulse');
+    const sceneMood = document.getElementById('sceneMood');
+
+    const COLS = 72;
+    const ROWS = 24;
+    const FRAME_MS = 120;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const scenes = [
+      {
+        id: 'chat-chaos',
+        short: 'Wrong model',
+        title: 'Most people start in chat chaos.',
+        note: 'Hermes is alive, but trapped in shallow prompts.',
+        themeLabel: 'chat chaos',
+        action: 'Recognize the wrong model',
+        background: 'message storms and broken threads',
+        narration: 'Hermes is being used like a chatbot, so context keeps resetting and the system never compounds. The agent is alive, but it is trapped in shallow requests.',
+        duration: 7000,
+        mode: 'chaos',
+        pulse: 'unstable',
+        mood: 'fractured'
+      },
+      {
+        id: 'durable-context',
+        short: 'Context',
+        title: 'Then the operator loads durable context.',
+        note: 'Identity, repo, goals, constraints, and do-not-touch zones come into frame.',
+        themeLabel: 'memory vault',
+        action: 'Give stable context',
+        background: 'memory blocks, source-of-truth rails, warm signal nodes',
+        narration: 'Now the workflow changes. Hermes receives stable information about the user, the project, constraints, preferences, and safe boundaries. The environment stops being generic.',
+        duration: 7000,
+        mode: 'memory',
+        pulse: 'steady',
+        mood: 'grounded'
+      },
+
+      {
+        id: 'inspect-state',
+        short: 'Inspect',
+        title: 'A good agent inspects before acting.',
+        note: 'The living agent scans folders, docs, and structure before touching anything.',
+        themeLabel: 'repo map',
+        action: 'Inspect current reality',
+        background: 'directory trees, document rails, scan lines and map grids',
+        narration: 'Instead of guessing, Hermes reads the repository, searches relevant files, and maps the current state. Inspection lowers risk before any change begins.',
+        duration: 7000,
+        mode: 'inspect',
+        pulse: 'scanning',
+        mood: 'analytic'
+      },
+
+      {
+        id: 'plan-room',
+        short: 'Plan',
+        title: 'Planning turns motion into controlled execution.',
+        note: 'The background becomes a structured planning room: boxes, arrows, dependencies, and bounded next steps.',
+        themeLabel: 'planning room',
+        action: 'Create the path before change',
+        background: 'linked plan boxes, directional arrows, bounded steps',
+        narration: 'A short explicit plan exposes assumptions, sequences the work, and makes review possible. This is where chat behavior becomes operator behavior.',
+        duration: 7000,
+        mode: 'plan',
+        pulse: 'measured',
+        mood: 'architected'
+      },
+
+      {
+        id: 'tool-execution',
+        short: 'Act',
+        title: 'Then tools connect the agent to reality.',
+        note: 'Terminal, files, web, browser, and task rails appear behind the moving agent.',
+        themeLabel: 'tool bay',
+        action: 'Execute deliberately with tools',
+        background: 'terminal panes, browser frames, file grids and command pulses',
+        narration: 'Now Hermes acts with evidence. It can inspect files, run commands, browse the web, and track tasks. This is grounded execution, not plausible text generation.',
+        duration: 7000,
+        mode: 'tools',
+        pulse: 'engaged',
+        mood: 'kinetic'
+      },
+
+      {
+        id: 'skill-forge',
+        short: 'Compound',
+        title: 'What works gets forged into a system.',
+        note: 'The agent moves through a forge of patterns, templates, and skills.',
+        themeLabel: 'skill forge',
+        action: 'Capture reusable workflows',
+        background: 'forging sparks, pattern lattices, reusable modules',
+        narration: 'A one-off success is fragile. A saved workflow compounds. Hermes turns stable patterns into reusable skills, templates, checklists, and operator memory.',
+        duration: 7000,
+        mode: 'forge',
+        pulse: 'forging',
+        mood: 'transformative'
+      },
+
+      {
+        id: 'automation-orbit',
+        short: 'Automate',
+        title: 'Finally, recurring work leaves chat and enters orbit.',
+        note: 'Schedulers, delegated cycles, and calm recurring loops surround the living agent.',
+        themeLabel: 'automation orbit',
+        action: 'Automate the stable parts',
+        background: 'orbital rings, scheduler dots, recurring dispatch routes',
+        narration: 'The mature system does not repeat stable work manually forever. It schedules jobs, delegates tasks, and turns useful motion into reliable ongoing operation.',
+        duration: 7600,
+        mode: 'orbit',
+        pulse: 'autonomous',
+        mood: 'orbital'
+      }
+    ];
+
+    const paletteByMode = {
+      chaos: { glow: 'rgba(255,154,142,0.18)', wash: 'rgba(161,71,53,0.12)', accent: '#ff9a8e', accent2: '#f7cf80' },
+      memory: { glow: 'rgba(247,207,128,0.16)', wash: 'rgba(223,184,101,0.10)', accent: '#f7cf80', accent2: '#8be2ae' },
+      inspect: { glow: 'rgba(141,211,255,0.16)', wash: 'rgba(141,211,255,0.08)', accent: '#8dd3ff', accent2: '#dce8f4' },
+      plan: { glow: 'rgba(167,173,255,0.16)', wash: 'rgba(107,114,255,0.10)', accent: '#aeb7ff', accent2: '#8dd3ff' },
+      tools: { glow: 'rgba(86,224,190,0.16)', wash: 'rgba(86,224,190,0.09)', accent: '#8be2ae', accent2: '#8dd3ff' },
+      forge: { glow: 'rgba(255,170,92,0.18)', wash: 'rgba(255,170,92,0.10)', accent: '#ffb36b', accent2: '#ffd89b' },
+      orbit: { glow: 'rgba(140,170,255,0.18)', wash: 'rgba(90,120,255,0.10)', accent: '#9db7ff', accent2: '#8be2ae' }
+    };
+
+    const agentFrames = [
+      ['  .-""-.  ',' / o  o \\ ','|   /\\   |','|  |==|  |',' \\  \/  / ',' /|/==\\|\\ ','/_/    \\_\\'],
+      ['  .-""-.  ',' / -  - \\ ','|   /\\   |','|  |==|  |',' \\  \/  / ',' /|/==\\|\\ ','/_/    \\_\\'],
+      ['  .-""-.  ',' / o  o \\ ','|   /\\   |','|  |==|  |',' \\ .__. / ',' /|/==\\|\\ ','/_/    \\_\\']
+    ];
+
+    let activeScene = 0;
+    let playing = !reducedMotion;
+    let frameTick = 0;
+    let sceneStartedAt = Date.now();
+    let renderTimer = null;
+    let typeTimer = null;
+
+    function makeGrid(fill = ' ') {
+      return Array.from({ length: ROWS }, () => Array(COLS).fill(fill));
+    }
+
+    function setChar(grid, x, y, ch) {
+      if (x >= 0 && x < COLS && y >= 0 && y < ROWS) grid[y][x] = ch;
+    }
+
+    function writeText(grid, x, y, text) {
+      for (let i = 0; i < text.length; i++) setChar(grid, x + i, y, text[i]);
+    }
+
+    function writeCentered(grid, y, text) {
+      const x = Math.max(0, Math.floor((COLS - text.length) / 2));
+      writeText(grid, x, y, text.slice(0, COLS));
+    }
+
+    function overlay(grid, x, y, art) {
+      art.forEach((line, dy) => {
+        for (let dx = 0; dx < line.length; dx++) {
+          const ch = line[dx];
+          if (ch !== ' ') setChar(grid, x + dx, y + dy, ch);
+        }
+      });
+    }
+
+    function drawBox(grid, x, y, w, h, label) {
+      for (let i = 0; i < w; i++) {
+        setChar(grid, x + i, y, i === 0 ? '┌' : i === w - 1 ? '┐' : '─');
+        setChar(grid, x + i, y + h - 1, i === 0 ? '└' : i === w - 1 ? '┘' : '─');
+      }
+      for (let j = 1; j < h - 1; j++) {
+        setChar(grid, x, y + j, '│');
+        setChar(grid, x + w - 1, y + j, '│');
+      }
+      if (label) writeText(grid, x + 2, y + 1, label.slice(0, Math.max(0, w - 4)));
+    }
+
+    function drawAgent(grid, t, mode) {
+      const blink = Math.floor(t / 6) % 5 === 0 ? 1 : 0;
+      const grin = Math.floor(t / 9) % 4 === 0 ? 2 : blink ? 1 : 0;
+      const frame = agentFrames[grin];
+      const bob = Math.sin(t / 3) > 0 ? 0 : 1;
+      let x = 28;
+      let y = 10 + bob;
+      if (mode === 'inspect') x = 9 + Math.floor((Math.sin(t / 4) + 1) * 8);
+      if (mode === 'tools') x = 23 + Math.floor((Math.sin(t / 3.5) + 1) * 9);
+      if (mode === 'orbit') x = 30 + Math.floor(Math.cos(t / 5) * 6);
+
+      const trailPoints = [
+        [x - 3, y + 5, '.'],
+        [x - 5, y + 5, '·'],
+        [x - 7, y + 4, '.']
+      ];
+      if (mode === 'inspect') trailPoints.push([x + 12, y + 2, ':']);
+      if (mode === 'tools') trailPoints.push([x + 13, y + 2, '✦'], [x + 15, y + 2, '.']);
+      if (mode === 'orbit') trailPoints.push([x - 9, y + 1, '•'], [x + 13, y + 1, '•']);
+      if (mode === 'forge') trailPoints.push([x - 4, y + 1, '*'], [x + 12, y + 1, '+']);
+      trailPoints.forEach(([tx, ty, ch]) => setChar(grid, tx, ty, ch));
+
+      overlay(grid, x, y, frame);
+      const pulseChar = mode === 'chaos' ? '!' : mode === 'memory' ? '●' : mode === 'plan' ? '◆' : mode === 'forge' ? '*' : '✦';
+      setChar(grid, x + 4 + (mode === 'tools' ? 10 : 0), y + 2, pulseChar);
+      setChar(grid, x + 4, y - 1, Math.floor(t / 4) % 2 === 0 ? '˄' : ' ');
+    }
+
+    function drawChaos(grid, t) {
+      const streams = [4, 16, 29, 43, 56];
+      streams.forEach((x, i) => {
+        for (let y = 1; y < ROWS - 2; y++) {
+          const k = (y + t + i * 2) % 6;
+          setChar(grid, x, y, k < 2 ? '│' : k < 4 ? ':' : '.');
+        }
+      });
+      const bubbles = [
+        'prompt?',
+        'try again',
+        'more context?',
+        'rewrite',
+        'one shot',
+        'guessing...'
+      ];
+      bubbles.forEach((txt, i) => {
+        const x = 3 + ((i * 11 + t * 2) % 48);
+        const y = 3 + ((i * 3 + t) % 14);
+        writeText(grid, x, y, '(' + txt + ')');
+      });
+      writeCentered(grid, 1, 'CHAT CHAOS / shallow prompts / reset reset reset');
+    }
+
+    function drawMemory(grid, t) {
+      for (let y = 2; y < ROWS - 1; y += 4) {
+        for (let x = 2; x < COLS - 2; x += 14) {
+          drawBox(grid, x, y, 12, 3, 'context');
+        }
+      }
+      const labels = ['who you are', 'project', 'goals', 'constraints', 'safe zones'];
+      labels.forEach((txt, i) => writeText(grid, 3 + i * 13, 19 - (i % 2), txt.slice(0, 11)));
+      for (let i = 0; i < 12; i++) {
+        const x = 5 + i * 5;
+        const y = 6 + Math.floor(Math.sin((t + i) / 3) * 2);
+        setChar(grid, x, y, '●');
+      }
+      writeCentered(grid, 1, 'DURABLE CONTEXT / memory rails / source of truth');
+    }
+
+    function drawInspect(grid, t) {
+      drawBox(grid, 2, 3, 22, 15, 'repo map');
+      const tree = ['docs/', 'agents/', 'tasks/', 'README.md', 'HERMES.md', 'skills/'];
+      tree.forEach((line, i) => writeText(grid, 4, 5 + i * 2, '├─ ' + line));
+      drawBox(grid, 43, 4, 24, 13, 'scan log');
+      const scan = ['read docs', 'search files', 'verify paths', 'inspect status', 'map risks'];
+      scan.forEach((line, i) => writeText(grid, 45, 6 + i * 2, '[' + (i < (t % 8) ? 'x' : ' ') + '] ' + line));
+      const beamX = 15 + ((t * 3) % 9);
+      for (let y = 4; y < 17; y++) setChar(grid, beamX, y, '│');
+      writeCentered(grid, 1, 'INSPECT FIRST / read state before changing it');
+    }
+
+    function drawPlan(grid, t) {
+      drawBox(grid, 4, 5, 18, 5, '1. inspect');
+      drawBox(grid, 27, 4, 18, 6, '2. plan');
+      drawBox(grid, 50, 5, 18, 5, '3. act');
+      drawBox(grid, 17, 14, 18, 5, '4. verify');
+      drawBox(grid, 40, 14, 20, 5, '5. preserve');
+      writeText(grid, 22, 7, '=====>');
+      writeText(grid, 45, 7, '=====>');
+      writeText(grid, 31, 12, 'v');
+      writeText(grid, 49, 12, 'v');
+      writeText(grid, 27, 16, '------->');
+      const pulseX = [20, 43, 31, 50][t % 4];
+      setChar(grid, pulseX, 12, '●');
+      writeCentered(grid, 1, 'PLAN BEFORE CHANGE / bounded steps / lower blast radius');
+    }
+
+    function drawTools(grid, t) {
+      drawBox(grid, 2, 3, 22, 8, 'terminal');
+      drawBox(grid, 26, 3, 20, 8, 'files');
+      drawBox(grid, 48, 3, 22, 8, 'browser');
+      drawBox(grid, 14, 14, 18, 7, 'web');
+      drawBox(grid, 38, 14, 20, 7, 'tasks');
+      writeText(grid, 4, 5, '$ inspect repo');
+      writeText(grid, 4, 7, '$ run checks');
+      writeText(grid, 28, 5, 'README.md');
+      writeText(grid, 28, 7, 'outline.md');
+      writeText(grid, 50, 5, '[ page ] [ click ]');
+      writeText(grid, 50, 7, '[ verify reality ]');
+      writeText(grid, 16, 16, 'search -> extract -> compare');
+      writeText(grid, 40, 16, '[todo] [delegate] [report]');
+      const pulse = 4 + (t % 16);
+      writeText(grid, pulse, 9, '>>>>>>>>');
+      writeCentered(grid, 1, 'TOOLS GROUND THE WORK / reality > plausible text');
+    }
+
+    function drawForge(grid, t) {
+      for (let i = 0, x = 5; x < COLS - 5; x += 12, i++) {
+        drawBox(grid, x, 4 + (i % 2), 10, 4, 'skill');
+      }
+      for (let i = 0; i < 18; i++) {
+        const x = (i * 7 + t * 3) % (COLS - 4) + 2;
+        const y = 3 + ((i * 5 + t) % 15);
+        setChar(grid, x, y, ['*', '+', '·', 'x'][i % 4]);
+      }
+      writeText(grid, 10, 18, 'template  ->  checklist  ->  automation candidate');
+      writeText(grid, 20, 20, '[capture]  [reuse]  [refine]');
+      writeCentered(grid, 1, 'SKILL FORGE / what works becomes reusable structure');
+    }
+
+    function drawOrbit(grid, t) {
+      const cx = 36;
+      const cy = 12;
+      const rings = [5, 8, 11];
+      rings.forEach((r, idx) => {
+        for (let a = 0; a < 360; a += 18) {
+          const rad = (a + t * (idx + 1) * 4) * Math.PI / 180;
+          const x = Math.round(cx + Math.cos(rad) * r * 1.8);
+          const y = Math.round(cy + Math.sin(rad) * r * 0.72);
+          setChar(grid, x, y, idx === 2 ? '·' : '•');
+        }
+      });
+      writeText(grid, 8, 4, 'cron');
+      writeText(grid, 56, 4, 'delegate');
+      writeText(grid, 8, 20, 'report');
+      writeText(grid, 54, 20, 'repeat');
+      writeCentered(grid, 1, 'AUTOMATION ORBIT / recurring work leaves live chat');
+    }
+
+    function renderScene(sceneIndex, t) {
+      const scene = scenes[sceneIndex];
+      const grid = makeGrid(' ');
+      if (scene.mode === 'chaos') drawChaos(grid, t);
+      if (scene.mode === 'memory') drawMemory(grid, t);
+      if (scene.mode === 'inspect') drawInspect(grid, t);
+      if (scene.mode === 'plan') drawPlan(grid, t);
+      if (scene.mode === 'tools') drawTools(grid, t);
+      if (scene.mode === 'forge') drawForge(grid, t);
+      if (scene.mode === 'orbit') drawOrbit(grid, t);
+      drawAgent(grid, t, scene.mode);
+      return grid.map(row => row.join('')).join('\n');
+    }
+
+    function typeCaption(text) {
+      if (typeTimer) clearInterval(typeTimer);
+      captionCopy.textContent = '';
+      let i = 0;
+      const target = reducedMotion ? text.length : 2;
+      const step = reducedMotion ? text.length : 2;
+      function tick() {
+        captionCopy.textContent = text.slice(0, i);
+        if (i >= text.length) {
+          clearInterval(typeTimer);
+          return;
+        }
+        i += step;
+      }
+      i = target;
+      tick();
+      if (!reducedMotion) typeTimer = setInterval(tick, 32);
+    }
+
+    function applyScenePalette(scene) {
+      const palette = paletteByMode[scene.mode] || paletteByMode.inspect;
+      const root = document.documentElement;
+      root.style.setProperty('--cinema-glow', palette.glow);
+      root.style.setProperty('--cinema-wash', palette.wash);
+      root.style.setProperty('--cinema-accent', palette.accent);
+      root.style.setProperty('--cinema-accent-2', palette.accent2);
+    }
+
+    function updateSceneMeta(index) {
+      const scene = scenes[index];
+      captionTitle.textContent = scene.title;
+      captionMode.textContent = scene.short;
+      captionTheme.textContent = 'Theme: ' + scene.themeLabel;
+      captionActionValue.textContent = scene.action;
+      captionBackgroundValue.textContent = scene.background;
+      sceneCounter.textContent = 'Scene ' + (index + 1) + ' / ' + scenes.length;
+      agentPulse.textContent = scene.pulse || 'steady';
+      sceneMood.textContent = scene.mood || 'focused';
+      applyScenePalette(scene);
+      typeCaption(scene.narration);
+      Array.from(sceneList.querySelectorAll('.scene-pill')).forEach((el, i) => {
+        el.classList.toggle('is-active', i === index);
+      });
+    }
+
+    function buildSceneList() {
+      sceneList.innerHTML = '';
+      scenes.forEach((scene, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'scene-pill';
+        btn.type = 'button';
+        btn.innerHTML = '<div class="scene-pill__label">' + scene.short + '</div>' +
+                        '<div class="scene-pill__title">' + scene.title + '</div>';
+        btn.addEventListener('click', () => {
+          activeScene = index;
+          sceneStartedAt = Date.now();
+          updateSceneMeta(activeScene);
+          drawFrame(true);
+        });
+        sceneList.appendChild(btn);
+      });
+    }
+
+    function drawFrame(force) {
+      const now = Date.now();
+      const scene = scenes[activeScene];
+      const elapsed = now - sceneStartedAt;
+      if (playing && elapsed >= scene.duration) {
+        activeScene = (activeScene + 1) % scenes.length;
+        sceneStartedAt = now;
+        frameTick = 0;
+        updateSceneMeta(activeScene);
+      }
+      const liveScene = scenes[activeScene];
+      const progress = Math.max(0, Math.min(1, (now - sceneStartedAt) / liveScene.duration));
+      sceneProgress.style.width = (progress * 100).toFixed(1) + '%';
+      const text = renderScene(activeScene, frameTick);
+      asciiScreen.textContent = text;
+      if (playing || force) frameTick += 1;
+    }
+
+    function startLoop() {
+      if (renderTimer) clearInterval(renderTimer);
+      renderTimer = setInterval(() => drawFrame(false), FRAME_MS);
+      drawFrame(true);
+    }
+
+    function togglePlayback() {
+      playing = !playing;
+      playPauseBtn.textContent = playing ? 'Pause' : 'Play';
+    }
+
+    function restartPlayback() {
+      activeScene = 0;
+      frameTick = 0;
+      sceneStartedAt = Date.now();
+      updateSceneMeta(activeScene);
+      drawFrame(true);
+    }
+
+    function speakScene() {
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const scene = scenes[activeScene];
+      const utterance = new SpeechSynthesisUtterance(scene.title + '. ' + scene.narration);
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 0.9;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    buildSceneList();
+    updateSceneMeta(activeScene);
+    playPauseBtn.addEventListener('click', togglePlayback);
+    restartBtn.addEventListener('click', restartPlayback);
+    speakBtn.addEventListener('click', speakScene);
+    startLoop();
+  </script>
+</body>
+</html>
