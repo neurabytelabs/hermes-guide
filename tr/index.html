@@ -361,6 +361,29 @@
     .callout--gold { background: var(--gold-dim); color: var(--gold); }
     .callout--sage { background: var(--sage-dim); color: var(--sage); }
 
+    .command-line {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 32, 0.92);
+      color: var(--terminal-text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .inline-code {
+      font-family: var(--font-mono);
+      font-size: .88em;
+      padding: 1px 5px;
+      border-radius: 7px;
+      background: var(--deep-blue-dim);
+      color: var(--deep-blue);
+    }
+
     .diff-panels {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -915,6 +938,7 @@
       <div class="topbar__actions">
         <a class="pill" href="#mindset">Zihniyet değişimi</a>
         <a class="pill" href="#ascii-cinema">ASCII sinema</a>
+        <a class="pill" href="#quick-start">Hızlı başlangıç</a>
         <a class="pill" href="#workflow">İş akışı</a>
         <a class="pill" href="#progression">İlerleme</a>
         <button class="theme-toggle" onclick="toggleTheme()">Temayı değiştir</button>
@@ -926,7 +950,7 @@
         <div class="subtitle">Hermes Zero-to-Hero</div>
         <h1>Daha iyi prompt yazma.<br>Daha iyi operasyon kur.</h1>
         <div class="lede"><strong>Gerçek yükseliş daha iyi promptlar değil.</strong> Ajan operatörü olmaktır.</div>
-        <div class="micro">Hermes ile kişisel bir operasyon sistemi kur: kalıcı bağlam, eylemden önce inceleme, değişiklikten önce planlama ve her seferinde sıfırdan başlamak yerine birikerek güçlenen iş akışları.</div>
+        <div class="micro">Hermes ile kişisel bir operasyon sistemi kur: kalıcı bağlam, eylemden önce inceleme disiplini, gerçek araç kullanımı, beceriler, hafıza, cron işleri, webhook’lar, gateway akışları ve her seferinde sıfırlanmak yerine biriken doğrulama.</div>
       </div>
       <div class="signal-stack">
         <div class="signal">
@@ -1044,51 +1068,89 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="quick-start">
       <div class="section-card">
         <div class="section-head">
           <div>
             <div class="eyebrow">Bölüm 3</div>
-            <h2>Operasyon modeli</h2>
+            <h2>Hermes ile ilk 15 dakika</h2>
           </div>
-          <p>Bunlar Hermes’i gerçek işte yararlı kılan davranışlardır, sadece sohbet penceresinde ilginç değil.</p>
+          <p>Pratik başla. Hermes’i aç, modeli seç, sistemi doğrula, sonra saf sohbette kalmak yerine araçlarla temellenmiş bir iş çalıştır.</p>
         </div>
         <div class="mini-grid">
           <article class="ve-card">
-            <div class="ve-card__label">01 / Yeniden çerçevele</div>
-            <h3 class="ve-card__title">Hermes sadece bir sohbet botu değil.</h3>
-            <p class="ve-card__copy">Bağlam taşıyabildiğinde, gerçekliği inceleyebildiğinde, araçları kullanabildiğinde ve işi yürütmeye yardımcı olduğunda güçlü olur.</p>
-            <div class="callout">Cevaplar zemin. Uygulama asıl mesele.</div>
+            <div class="ve-card__label">01 / Kurulum</div>
+            <h3 class="ve-card__title">Sihirbazı bir kez çalıştır.</h3>
+            <p class="ve-card__copy">Provider, model, terminal, gateway, araçlar ve ajan varsayılanlarını etkileşimli kurulumla yapılandır.</p>
+            <code class="command-line">hermes setup</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">02 / Kimlik değişimi</div>
-            <h3 class="ve-card__title">Prompt yazıcı gibi değil, operatör gibi düşün.</h3>
-            <p class="ve-card__copy">Amaç daha iyi ifade değil. Amaç daha iyi uygulama.</p>
-            <div class="callout callout--gold">Sihirli promptların peşinden koşmayı bırak. Güvenilir iş akışları tasarla.</div>
+            <div class="ve-card__label">02 / Sağlık</div>
+            <h3 class="ve-card__title">Operasyondan önce kontrol et.</h3>
+            <p class="ve-card__copy">Eksik bağımlılıkları, kimlik doğrulama sorunlarını ve gateway/araç yapılandırmasını sağlık komutlarıyla yakala.</p>
+            <code class="command-line">hermes doctor<br>hermes status</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">03 / Bağlam</div>
-            <h3 class="ve-card__title">Kalıcı bağlamla başla.</h3>
-            <p class="ve-card__copy">Hermes’e kim olduğunu, projenin ne olduğunu, şu an neyin önemli olduğunu, başarının neye benzediğini ve neye dokunulmaması gerektiğini söyle.</p>
-            <div class="callout">Bağlam yok = sığ uygulama.</div>
+            <div class="ve-card__label">03 / Model</div>
+            <h3 class="ve-card__title">Doğru motoru seç.</h3>
+            <p class="ve-card__copy">Hermes provider’dan bağımsızdır. İş akışını değiştirmeden model ve provider değiştirebilirsin.</p>
+            <code class="command-line">hermes model</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">04 / İnceleme</div>
-            <h3 class="ve-card__title">Eylemden önce incele.</h3>
-            <p class="ve-card__copy">Dosyaları değiştirmeden, komut çalıştırmadan veya karar vermeden önce Hermes’ten mevcut durumu incelemesini iste.</p>
-            <div class="callout callout--sage">Önce oku. Sonra değiştir.</div>
+            <div class="ve-card__label">04 / Tek seferlik</div>
+            <h3 class="ve-card__title">Script’ler için non-interactive mod kullan.</h3>
+            <p class="ve-card__copy">Otomasyon ve tekrarlanabilir kontroller için shell’den tek sorgu çalıştır ve nihai çıktıyı al.</p>
+            <code class="command-line">hermes chat -q "Bu repoyu incele ve riskleri özetle"</code>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Bölüm 4</div>
+            <h2>Güncel operasyon modeli</h2>
+          </div>
+          <p>Hermes en çok kalıcı bağlam, araçlar, beceriler, hafıza, zamanlama ve mesajlaşma aynı operatör döngüsüne hizmet ettiğinde güçlenir.</p>
+        </div>
+        <div class="mini-grid">
+          <article class="ve-card">
+            <div class="ve-card__label">01 / CLI</div>
+            <h3 class="ve-card__title">Terminal merkezli, otomasyona hazır.</h3>
+            <p class="ve-card__copy">Etkileşimli iş için <span class="inline-code">hermes</span>, tek seferlik uygulama için <span class="inline-code">hermes chat -q</span>, paralel ajanlar izole git alanı istediğinde <span class="inline-code">--worktree</span> kullan.</p>
+            <div class="callout">CLI kontrol odasıdır; sohbet yalnızca arayüzlerden biridir.</div>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">05 / Planlama</div>
-            <h3 class="ve-card__title">Değişiklikten önce planla.</h3>
-            <p class="ve-card__copy">Kısa bir plan kaosu azaltır, varsayımları ortaya çıkarır ve etki alanını daraltır. Dev bir şartnameye değil, net bir yola ihtiyacın var.</p>
-            <div class="callout callout--gold">Daha az doğaçlama. Daha fazla kontrol.</div>
-          </article>
-          <article class="ve-card">
-            <div class="ve-card__label">06 / Araç kullanımı</div>
-            <h3 class="ve-card__title">İşi somutlaştırmak için araçları kullan.</h3>
-            <p class="ve-card__copy">Terminal. Dosyalar. Web. Tarayıcı. Görev takibi. Delegasyon. Somut uygulama her zaman makul metni yener.</p>
+            <div class="ve-card__label">02 / Araç setleri</div>
+            <h3 class="ve-card__title">Cevapları gerçekliğe bağla.</h3>
+            <p class="ve-card__copy">Terminal, file, web, browser, vision, image generation, TTS, todo, cronjob, delegation, memory, session search ve skills gibi odaklı araç setlerini kullan.</p>
             <div class="callout callout--danger">Gerçeklik kontrol edilebiliyorsa tahminle yetinme.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">03 / Beceriler + hafıza</div>
+            <h3 class="ve-card__title">İşe yarayanı biriktir.</h3>
+            <p class="ve-card__copy">Hafıza kalıcı gerçekleri ve tercihleri tutar. Beceriler yeniden kullanılabilir prosedürleri, komutları, tuzakları ve doğrulama adımlarını tutar.</p>
+            <code class="command-line">hermes skills search github<br>hermes skills install &lt;skill-id&gt;<br>hermes memory status</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">04 / Gateway</div>
+            <h3 class="ve-card__title">Zaten bulunduğun yerden operasyon yap.</h3>
+            <p class="ve-card__copy">Gateway Hermes’i Telegram, Discord, Slack, WhatsApp, Signal, Email, SMS, Matrix, Mattermost, Home Assistant, Feishu, WeCom, BlueBubbles, Weixin, API Server ve webhook’lara taşır.</p>
+            <code class="command-line">hermes gateway setup<br>hermes gateway status</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">05 / Cron + webhook</div>
+            <h3 class="ve-card__title">Kontrolleri tekrarlayan operatörlere dönüştür.</h3>
+            <p class="ve-card__copy">Zamanlanmış işler için cron, olay tetiklemeli işler için webhook kullan. Faydalı promptların operasyon rutinine dönüştüğü yer burasıdır.</p>
+            <code class="command-line">hermes cron create "0 9 * * *"<br>hermes webhook subscribe deploy-watch</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">06 / MCP + plugin</div>
+            <h3 class="ve-card__title">Ajanı baştan yazmadan genişlet.</h3>
+            <p class="ve-card__copy">İş akışı daha özel araçlara ihtiyaç duyduğunda MCP sunucuları bağla, plugin kur ve gerekirse Hermes’in kendisini MCP sunucusu olarak yayınla.</p>
+            <code class="command-line">hermes mcp list<br>hermes plugins list</code>
           </article>
         </div>
       </div>
@@ -1098,47 +1160,48 @@
       <div class="section-card">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Bölüm 4</div>
-            <h2>Biriken iş akışı</h2>
+            <div class="eyebrow">Bölüm 5</div>
+            <h2>Güvenli biriken iş akışı</h2>
           </div>
-          <p>İyi Hermes kullanımı şanslı sohbetler dizisi değildir. Zamanla biriken tekrarlanabilir bir operasyon döngüsüdür.</p>
+          <p>İyi Hermes kullanımı şanslı sohbetler dizisi değildir. Kontrollü bir döngüdür: bağlam → incele → planla → uygula → doğrula → biriktir.</p>
         </div>
         <div class="pipeline">
           <div class="pipeline__step">
             <div class="pipeline__num">1</div>
             <div class="pipeline__title">Bağlam</div>
-            <p>Senin, projenin, kısıtlamaların ve doğruluk kaynaklarının bilgisini yükle.</p>
+            <p>Proje, kısıtlar, doğruluk kaynakları, başarı ölçütleri ve dokunma alanları gibi kalıcı bilgileri yükle.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">2</div>
             <div class="pipeline__title">İncele</div>
-            <p>Dokunmadan önce dokümanları oku, dosyaları ara, varsayımları doğrula ve mevcut durumu haritala.</p>
+            <p>Bir şeye dokunmadan önce dosyaları, dokümanları, logları, web sayfalarını, issue’ları ve sistem durumunu oku.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">3</div>
             <div class="pipeline__title">Planla</div>
-            <p>İşi kontrollü adımlara böl, riskleri ortaya çıkar ve sırayı gözden geçirilebilir hale getir.</p>
+            <p>İşi geri alınabilir adımlara böl, riskleri görünür yap ve en küçük güvenli hamleyi seç.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">4</div>
             <div class="pipeline__title">Uygula</div>
-            <p>Kasıtlı olarak uygula, değişiklikleri net raporla ve riskli bir durum ortaya çıktığında dur.</p>
+            <p>Araçları kasıtlı kullan. Yıkıcı, geniş etkili veya dış dünyayı etkileyen işlemlerden önce onay iste.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">5</div>
-            <div class="pipeline__title">Biriktir</div>
-            <p>İyi sonuçları yeniden kullanılabilir becerilere, şablonlara, kontrol listelerine ve tekrarlayan otomasyonlara dönüştür.</p>
+            <div class="pipeline__title">Doğrula</div>
+            <p>Test, build, tarayıcı kontrolü, API yoklaması veya canlı smoke test çalıştır. Komutları ve sonuçları net raporla.</p>
           </div>
         </div>
+        <div class="footer-note"><strong>Sonra biriktir:</strong> yeniden kullanılabilir prosedürleri beceri olarak kaydet, kalıcı gerçekleri hafızada tut, tekrar eden kontrolleri cron ile zamanla ve acil iş akışlarını gateway üzerinden yürüt.</div>
       </div>
     </section>
 
     <section class="section" id="progression">
       <div class="operators">
         <div class="big-quote">
-          <div class="eyebrow">Bölüm 5</div>
+          <div class="eyebrow">Bölüm 6</div>
           <blockquote>Kişisel operasyon sistemini kur.</blockquote>
-          <p>Hermes sohbet botu olmayı bırakıp senin uygulama şeklinin parçası olduğunda güçlü olur. Gerçek kazanım daha iyi bir cevap değil; işi daha sakin, daha hızlı ve daha tekrarlanabilir şekilde ilerletmektir.</p>
+          <p>Hermes sohbet botu olmayı bırakıp uygulama şeklinin parçası olduğunda güçlenir: terminal, dosyalar, tarayıcı, hafıza, beceriler, zamanlamalar, webhook’lar ve mesajlaşma tek disiplinli döngüye bağlanır.</p>
         </div>
         <div class="kpi-stack">
           <div class="kpi">
@@ -1147,19 +1210,19 @@
           </div>
           <div class="kpi">
             <div class="kpi-label">Sonra</div>
-            <div class="kpi-value">Yapılandırılmış kullanıcı</div>
+            <div class="kpi-value">Araç-bilinçli operatör</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Sonra</div>
-            <div class="kpi-value">Bağlam-bilinçli operatör</div>
+            <div class="kpi-value">Bağlam + beceri kurucu</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Sonra</div>
-            <div class="kpi-value">Sistem kurucu</div>
+            <div class="kpi-value">Otomasyon sahibi</div>
           </div>
         </div>
       </div>
-      <div class="footer-note"><strong>Son söz:</strong> Gerçek yükseliş daha iyi promptlar değil. Ajan operatörü olmaktır. Hermes’i önce incelemek, net planlamak, kasıtlı uygulamak ve işe yarayanı kalıcı sistemlere dönüştürmek için kullan.</div>
+      <div class="footer-note"><strong>Son söz:</strong> Gerçek yükseliş daha iyi promptlar değil. Ajan operatörü olmaktır. Hermes’i önce incelemek, net planlamak, kasıtlı uygulamak, araçlarla doğrulamak ve işe yarayanı kalıcı sistemlere dönüştürmek için kullan.</div>
     </section>
   </div>
 

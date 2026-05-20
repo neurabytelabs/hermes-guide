@@ -361,6 +361,29 @@
     .callout--gold { background: var(--gold-dim); color: var(--gold); }
     .callout--sage { background: var(--sage-dim); color: var(--sage); }
 
+    .command-line {
+      display: block;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(15, 23, 32, 0.92);
+      color: var(--terminal-text);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.45;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .inline-code {
+      font-family: var(--font-mono);
+      font-size: .88em;
+      padding: 1px 5px;
+      border-radius: 7px;
+      background: var(--deep-blue-dim);
+      color: var(--deep-blue);
+    }
+
     .diff-panels {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -915,6 +938,7 @@
       <div class="topbar__actions">
         <a class="pill" href="#mindset">Mindset shift</a>
         <a class="pill" href="#ascii-cinema">ASCII cinema</a>
+        <a class="pill" href="#quick-start">Quick start</a>
         <a class="pill" href="#workflow">Workflow</a>
         <a class="pill" href="#progression">Progression</a>
         <button class="theme-toggle" onclick="toggleTheme()">Toggle theme</button>
@@ -926,7 +950,7 @@
         <div class="subtitle">Hermes Zero-to-Hero</div>
         <h1>Don’t just prompt better.<br>Operate better.</h1>
         <div class="lede"><strong>The real upgrade is not better prompts.</strong> It’s becoming an agent operator.</div>
-        <div class="micro">Use Hermes to build a personal operating system for execution: durable context, inspection before action, planning before change, and workflows that compound instead of resetting to zero every time.</div>
+        <div class="micro">Use Hermes to build a personal operating system for execution: durable context, inspect-before-act discipline, real tool use, skills, memory, cron jobs, webhooks, gateway workflows, and verification that compounds instead of resetting to zero every time.</div>
       </div>
       <div class="signal-stack">
         <div class="signal">
@@ -1044,51 +1068,89 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" id="quick-start">
       <div class="section-card">
         <div class="section-head">
           <div>
             <div class="eyebrow">Section 3</div>
-            <h2>The operating model</h2>
+            <h2>First 15 minutes with Hermes</h2>
           </div>
-          <p>These are the behaviors that make Hermes useful in real work, not just entertaining in a chat window.</p>
+          <p>Start practical. Install or open Hermes, pick a model, verify the system, then run one grounded task with tools instead of staying in pure chat.</p>
         </div>
         <div class="mini-grid">
           <article class="ve-card">
-            <div class="ve-card__label">01 / Reframe</div>
-            <h3 class="ve-card__title">Hermes is not just a chatbot.</h3>
-            <p class="ve-card__copy">It becomes powerful when it can carry context, inspect reality, use tools, and help run the work.</p>
-            <div class="callout">Answers are the floor. Execution is the point.</div>
+            <div class="ve-card__label">01 / Setup</div>
+            <h3 class="ve-card__title">Run the wizard once.</h3>
+            <p class="ve-card__copy">Use the interactive setup to configure provider, model, terminal, gateway, tools, and agent defaults.</p>
+            <code class="command-line">hermes setup</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">02 / Identity shift</div>
-            <h3 class="ve-card__title">Think like an operator, not a prompter.</h3>
-            <p class="ve-card__copy">The goal is not better wording. The goal is better execution.</p>
-            <div class="callout callout--gold">Stop chasing magic prompts. Start designing reliable workflows.</div>
+            <div class="ve-card__label">02 / Health</div>
+            <h3 class="ve-card__title">Check before you operate.</h3>
+            <p class="ve-card__copy">Use health and status commands to catch missing dependencies, auth issues, and gateway/tool configuration problems.</p>
+            <code class="command-line">hermes doctor<br>hermes status</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">03 / Context</div>
-            <h3 class="ve-card__title">Start with durable context.</h3>
-            <p class="ve-card__copy">Tell Hermes who you are, what the project is, what matters now, what success looks like, and what should not be touched.</p>
-            <div class="callout">No context = shallow execution.</div>
+            <div class="ve-card__label">03 / Model</div>
+            <h3 class="ve-card__title">Choose the right engine.</h3>
+            <p class="ve-card__copy">Hermes is provider-agnostic. Switch models/providers without changing the workflow around them.</p>
+            <code class="command-line">hermes model</code>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">04 / Inspection</div>
-            <h3 class="ve-card__title">Inspect before action.</h3>
-            <p class="ve-card__copy">Before changing files, running commands, or making decisions, ask Hermes to inspect the current state.</p>
-            <div class="callout callout--sage">Read first. Change second.</div>
+            <div class="ve-card__label">04 / One-shot</div>
+            <h3 class="ve-card__title">Use non-interactive mode for scripts.</h3>
+            <p class="ve-card__copy">For automation and repeatable checks, run a single query from the shell and capture the final answer.</p>
+            <code class="command-line">hermes chat -q "Inspect this repo and summarize the risks"</code>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Section 4</div>
+            <h2>The current operating model</h2>
+          </div>
+          <p>Hermes is strongest when durable context, tools, skills, memory, scheduling, and messaging all serve the same operator loop.</p>
+        </div>
+        <div class="mini-grid">
+          <article class="ve-card">
+            <div class="ve-card__label">01 / CLI</div>
+            <h3 class="ve-card__title">Terminal-first, automation-ready.</h3>
+            <p class="ve-card__copy">Use <span class="inline-code">hermes</span> for interactive work, <span class="inline-code">hermes chat -q</span> for one-off execution, and <span class="inline-code">--worktree</span> when parallel agents need isolated git workspaces.</p>
+            <div class="callout">The CLI is the control room; chat is only one interface.</div>
           </article>
           <article class="ve-card">
-            <div class="ve-card__label">05 / Planning</div>
-            <h3 class="ve-card__title">Plan before change.</h3>
-            <p class="ve-card__copy">A short plan reduces chaos, exposes assumptions, and lowers blast radius. You do not need a huge spec. You need a clear path.</p>
-            <div class="callout callout--gold">Less improvisation. More control.</div>
-          </article>
-          <article class="ve-card">
-            <div class="ve-card__label">06 / Tool use</div>
-            <h3 class="ve-card__title">Use tools to ground the work.</h3>
-            <p class="ve-card__copy">Terminal. Files. Web. Browser. Task tracking. Delegation. Grounded execution beats plausible text every time.</p>
+            <div class="ve-card__label">02 / Toolsets</div>
+            <h3 class="ve-card__title">Ground answers in reality.</h3>
+            <p class="ve-card__copy">Enable focused toolsets such as terminal, file, web, browser, vision, image generation, TTS, todo, cronjob, delegation, memory, session search, and skills.</p>
             <div class="callout callout--danger">If reality can be checked, don’t settle for guessing.</div>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">03 / Skills + memory</div>
+            <h3 class="ve-card__title">Compound what works.</h3>
+            <p class="ve-card__copy">Memory keeps stable facts and preferences. Skills keep reusable procedures, commands, pitfalls, and verification steps.</p>
+            <code class="command-line">hermes skills search github<br>hermes skills install &lt;skill-id&gt;<br>hermes memory status</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">04 / Gateway</div>
+            <h3 class="ve-card__title">Operate from where you already are.</h3>
+            <p class="ve-card__copy">The gateway brings Hermes to Telegram, Discord, Slack, WhatsApp, Signal, Email, SMS, Matrix, Mattermost, Home Assistant, Feishu, WeCom, BlueBubbles, Weixin, API Server, and webhooks.</p>
+            <code class="command-line">hermes gateway setup<br>hermes gateway status</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">05 / Cron + webhooks</div>
+            <h3 class="ve-card__title">Turn checks into recurring operators.</h3>
+            <p class="ve-card__copy">Use cron for scheduled runs and webhooks for event-driven work. This is where useful prompts become operational routines.</p>
+            <code class="command-line">hermes cron create "0 9 * * *"<br>hermes webhook subscribe deploy-watch</code>
+          </article>
+          <article class="ve-card">
+            <div class="ve-card__label">06 / MCP + plugins</div>
+            <h3 class="ve-card__title">Extend without rewriting the agent.</h3>
+            <p class="ve-card__copy">Connect MCP servers, install plugins, and expose Hermes itself as an MCP server when your workflow needs more specialized tools.</p>
+            <code class="command-line">hermes mcp list<br>hermes plugins list</code>
           </article>
         </div>
       </div>
@@ -1098,47 +1160,48 @@
       <div class="section-card">
         <div class="section-head">
           <div>
-            <div class="eyebrow">Section 4</div>
-            <h2>The compounding workflow</h2>
+            <div class="eyebrow">Section 5</div>
+            <h2>The safe compounding workflow</h2>
           </div>
-          <p>Good Hermes usage is not a sequence of lucky chats. It is a repeatable operating loop that compounds over time.</p>
+          <p>Good Hermes usage is not a sequence of lucky chats. It is a controlled loop: context → inspect → plan → act → verify → compound.</p>
         </div>
         <div class="pipeline">
           <div class="pipeline__step">
             <div class="pipeline__num">1</div>
             <div class="pipeline__title">Context</div>
-            <p>Load stable information about you, the project, constraints, and source-of-truth locations.</p>
+            <p>Load stable information: project, constraints, source-of-truth docs, success criteria, and do-not-touch zones.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">2</div>
             <div class="pipeline__title">Inspect</div>
-            <p>Read docs, search files, verify assumptions, and map the current state before touching anything.</p>
+            <p>Read files, docs, logs, webpages, issues, and system state before touching anything.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">3</div>
             <div class="pipeline__title">Plan</div>
-            <p>Break the work into controlled steps, surface risks, and make the sequence reviewable.</p>
+            <p>Break work into reversible steps, surface risks, and choose the minimum safe move.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">4</div>
             <div class="pipeline__title">Act</div>
-            <p>Execute deliberately, report changes clearly, and stop when something becomes risky.</p>
+            <p>Use tools deliberately. Ask for approval before destructive, broad, or external-impact operations.</p>
           </div>
           <div class="pipeline__step">
             <div class="pipeline__num">5</div>
-            <div class="pipeline__title">Compound</div>
-            <p>Turn good outcomes into reusable skills, templates, checklists, and recurring automations.</p>
+            <div class="pipeline__title">Verify</div>
+            <p>Run tests, builds, browser checks, API probes, or live smoke tests. Report exact commands and results.</p>
           </div>
         </div>
+        <div class="footer-note"><strong>Then compound:</strong> save reusable procedures as skills, keep stable facts in memory, schedule repeated checks with cron, and route urgent workflows through the gateway.</div>
       </div>
     </section>
 
     <section class="section" id="progression">
       <div class="operators">
         <div class="big-quote">
-          <div class="eyebrow">Section 5</div>
+          <div class="eyebrow">Section 6</div>
           <blockquote>Build your personal operating system.</blockquote>
-          <p>Hermes becomes powerful when it stops being a chatbot and starts becoming part of how you execute. The real win is not a better answer. It is a calmer, faster, more repeatable way to move work through reality.</p>
+          <p>Hermes becomes powerful when it stops being a chatbot and starts becoming part of how you execute: terminal, files, browser, memory, skills, schedules, webhooks, and messaging all tied to one disciplined loop.</p>
         </div>
         <div class="kpi-stack">
           <div class="kpi">
@@ -1147,19 +1210,19 @@
           </div>
           <div class="kpi">
             <div class="kpi-label">Then</div>
-            <div class="kpi-value">Structured user</div>
+            <div class="kpi-value">Tool-aware operator</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Then</div>
-            <div class="kpi-value">Context-aware operator</div>
+            <div class="kpi-value">Context + skills builder</div>
           </div>
           <div class="kpi">
             <div class="kpi-label">Then</div>
-            <div class="kpi-value">System builder</div>
+            <div class="kpi-value">Automation owner</div>
           </div>
         </div>
       </div>
-      <div class="footer-note"><strong>Final line:</strong> The real upgrade is not better prompts. It’s becoming an agent operator. Use Hermes to inspect first, plan clearly, act deliberately, and turn what works into durable systems.</div>
+      <div class="footer-note"><strong>Final line:</strong> The real upgrade is not better prompts. It’s becoming an agent operator. Use Hermes to inspect first, plan clearly, act deliberately, verify with tools, and turn what works into durable systems.</div>
     </section>
   </div>
 
